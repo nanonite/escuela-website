@@ -1,0 +1,682 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Escuela Brahmavidya — El trabajo interior, estructurado.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --canvas: #F2F2F0;
+      --canvas-2: #E8E8E5;
+      --ink: #0A0A0A;
+      --ink-2: #18181B;
+      --muted: #57575A;
+      --hairline: rgba(10,10,10,0.08);
+      --hairline-strong: rgba(10,10,10,0.12);
+      --innerlight: rgba(255,255,255,0.65);
+      --sage: #1F4D3F;
+      --sage-light: #2D6A56;
+      --sage-glow: #5A8C7A;
+      --gold: #C9B79A;
+      --sans: 'Plus Jakarta Sans', 'Geist', 'Cabinet Grotesk', system-ui, sans-serif;
+      --mono: 'JetBrains Mono', 'Geist Mono', ui-monospace, monospace;
+      --ease: cubic-bezier(0.32, 0.72, 0, 1);
+      --ease-spring: cubic-bezier(0.16, 1.16, 0.3, 1);
+      --shell-radius: 2.25rem;
+      --core-radius: calc(2.25rem - 0.4rem);
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      background: var(--canvas);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.5;
+      letter-spacing: -0.005em;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    .wrap { max-width: 1240px; margin: 0 auto; padding: 0 28px; }
+
+    /* ============ AMBIENT MESH ============ */
+    .mesh {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      overflow: hidden;
+    }
+    .mesh::before, .mesh::after {
+      content: ''; position: absolute; border-radius: 50%; filter: blur(90px);
+      opacity: 0.18; will-change: transform;
+    }
+    .mesh::before {
+      width: 720px; height: 720px;
+      background: radial-gradient(circle at 30% 30%, var(--sage-glow), transparent 60%);
+      top: -180px; left: -160px;
+      animation: drift1 28s var(--ease) infinite alternate;
+    }
+    .mesh::after {
+      width: 560px; height: 560px;
+      background: radial-gradient(circle at 60% 60%, var(--gold), transparent 60%);
+      top: 120px; right: -140px;
+      animation: drift2 36s var(--ease) infinite alternate;
+    }
+    @keyframes drift1 { from { transform: translate3d(0,0,0); } to { transform: translate3d(80px, 60px, 0); } }
+    @keyframes drift2 { from { transform: translate3d(0,0,0); } to { transform: translate3d(-60px, 40px, 0); } }
+    @media (prefers-reduced-motion: reduce) { .mesh::before, .mesh::after { animation: none; } }
+
+    main, header, footer { position: relative; z-index: 1; }
+
+    /* ============ FLOATING PILL NAV ============ */
+    .nav-shell {
+      position: sticky; top: 24px; z-index: 50;
+      margin: 24px auto 0;
+      padding: 6px;
+      width: max-content; max-width: calc(100% - 56px);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.42);
+      backdrop-filter: saturate(160%) blur(22px);
+      -webkit-backdrop-filter: saturate(160%) blur(22px);
+      box-shadow:
+        0 1px 0 rgba(255,255,255,0.45) inset,
+        0 0 0 1px rgba(10,10,10,0.05),
+        0 12px 36px -18px rgba(10,10,10,0.18);
+    }
+    .nav {
+      display: flex; align-items: center; gap: 18px;
+      padding: 6px 8px 6px 18px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.55);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+    }
+    .nav .brand { font-weight: 700; font-size: 16px; letter-spacing: -0.02em; display: inline-flex; align-items: center; gap: 8px; }
+    .nav .brand-mark {
+      width: 22px; height: 22px; border-radius: 8px;
+      background: linear-gradient(135deg, var(--sage) 0%, var(--sage-glow) 100%);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.35), 0 1px 2px rgba(10,10,10,0.18);
+    }
+    .nav ul { list-style: none; display: flex; gap: 6px; margin: 0; padding: 0; }
+    .nav ul a {
+      display: inline-block; padding: 9px 14px; border-radius: 999px;
+      color: var(--ink); text-decoration: none; font-size: 13px; font-weight: 500;
+      transition: background 300ms var(--ease);
+    }
+    .nav ul a:hover { background: rgba(10,10,10,0.05); }
+
+    .pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 7px 7px 7px 16px;
+      border-radius: 999px;
+      background: var(--ink); color: var(--canvas);
+      font: 600 13px/1 var(--sans); cursor: pointer; border: none;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
+      transition: transform 300ms var(--ease);
+    }
+    .pill .icon-wrap {
+      width: 26px; height: 26px; border-radius: 999px;
+      background: rgba(255,255,255,0.14);
+      display: inline-flex; align-items: center; justify-content: center;
+      transition: transform 360ms var(--ease-spring), background 300ms var(--ease);
+    }
+    .pill:hover .icon-wrap { transform: translate(2px, -1px) scale(1.06); background: rgba(255,255,255,0.22); }
+    .pill:active { transform: scale(0.98); }
+    .pill svg { width: 12px; height: 12px; stroke: currentColor; fill: none; }
+
+    /* ============ HERO ============ */
+    .hero {
+      min-height: 100dvh;
+      padding: 96px 0 120px;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 12px; border-radius: 999px;
+      background: rgba(255,255,255,0.6);
+      box-shadow: inset 0 0 0 1px var(--hairline);
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--muted);
+    }
+    .eyebrow .dot { width: 6px; height: 6px; border-radius: 999px; background: var(--sage); box-shadow: 0 0 0 4px rgba(31,77,63,0.18); }
+    .hero h1 {
+      font-size: clamp(48px, 7vw, 92px);
+      font-weight: 800;
+      line-height: 0.96;
+      letter-spacing: -0.038em;
+      margin: 22px 0 28px;
+      max-width: 14ch;
+    }
+    .hero h1 .soft { color: var(--muted); font-weight: 500; }
+    .hero p.lede {
+      color: var(--muted);
+      font-size: 18px;
+      max-width: 52ch;
+      margin: 0 0 34px;
+      line-height: 1.55;
+    }
+    .hero .actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+    .ghost {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 11px 18px; border-radius: 999px;
+      background: rgba(255,255,255,0.5);
+      box-shadow: inset 0 0 0 1px var(--hairline-strong);
+      font: 500 13.5px/1 var(--sans); color: var(--ink); cursor: pointer; border: none;
+      transition: background 300ms var(--ease), transform 300ms var(--ease);
+    }
+    .ghost:hover { background: rgba(255,255,255,0.85); }
+    .ghost:active { transform: scale(0.98); }
+
+    /* ============ HERO PREVIEW (DOUBLE-BEZEL) ============ */
+    .hero-preview {
+      position: relative;
+      padding: 10px;
+      border-radius: var(--shell-radius);
+      background: rgba(255,255,255,0.45);
+      box-shadow:
+        inset 0 1px 0 var(--innerlight),
+        0 0 0 1px var(--hairline),
+        0 30px 60px -28px rgba(10,10,10,0.22),
+        0 12px 24px -16px rgba(10,10,10,0.10);
+    }
+    .hero-preview .core {
+      position: relative;
+      border-radius: var(--core-radius);
+      background: linear-gradient(180deg, #FAFAF7 0%, #EFEFEB 100%);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.85), inset 0 0 0 1px var(--hairline);
+      padding: 22px;
+      overflow: hidden;
+    }
+    .preview-bar { display: flex; gap: 6px; margin-bottom: 18px; }
+    .preview-bar span { width: 10px; height: 10px; border-radius: 999px; background: rgba(10,10,10,0.10); }
+    .preview-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .pv-cell {
+      border-radius: 16px;
+      background: rgba(255,255,255,0.8);
+      box-shadow: inset 0 0 0 1px var(--hairline), inset 0 1px 0 rgba(255,255,255,0.8);
+      padding: 14px;
+    }
+    .pv-cell.span2 { grid-column: span 2; }
+    .pv-cell h4 { margin: 0 0 6px; font-size: 12px; font-weight: 600; letter-spacing: -0.01em; }
+    .pv-cell p { margin: 0; font-size: 11.5px; color: var(--muted); line-height: 1.45; }
+    .pv-cell .meta { font-family: var(--mono); font-size: 9.5px; color: var(--muted); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 6px; }
+    .pv-cell .num { font-size: 26px; font-weight: 700; letter-spacing: -0.03em; line-height: 1; margin-top: 4px; }
+    .pv-cell .num small { font-size: 12px; color: var(--muted); margin-left: 4px; font-weight: 500; }
+    .pv-cell .row { display: flex; align-items: center; gap: 10px; }
+    .pulse {
+      width: 8px; height: 8px; border-radius: 999px; background: var(--sage);
+      box-shadow: 0 0 0 0 rgba(31,77,63,0.4);
+      animation: pulse 2.4s var(--ease) infinite;
+    }
+    @keyframes pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(31,77,63,0.4); }
+      70%  { box-shadow: 0 0 0 10px rgba(31,77,63,0); }
+      100% { box-shadow: 0 0 0 0 rgba(31,77,63,0); }
+    }
+    .progress-ring {
+      width: 38px; height: 38px; border-radius: 999px;
+      background: conic-gradient(var(--sage) 0 67%, rgba(10,10,10,0.08) 67% 100%);
+      mask: radial-gradient(circle 14px, transparent 12px, black 13px);
+      -webkit-mask: radial-gradient(circle 14px, transparent 12px, black 13px);
+      margin-top: 6px;
+    }
+
+    /* ============ SECTION DEFAULTS ============ */
+    section.block { padding: 112px 0; position: relative; }
+    .section-head { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: end; margin-bottom: 56px; }
+    .section-head h2 {
+      font-size: clamp(38px, 5vw, 64px);
+      font-weight: 700;
+      letter-spacing: -0.035em;
+      line-height: 1;
+      margin: 16px 0 0;
+      max-width: 14ch;
+    }
+    .section-head p { color: var(--muted); font-size: 16.5px; max-width: 46ch; margin: 0; line-height: 1.55; }
+
+    /* ============ PATH TO ENLIGHTENMENT ============ */
+    .path-steps { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; }
+    .step-card {
+      padding: 8px;
+      border-radius: var(--shell-radius);
+      background: rgba(255,255,255,0.5);
+      box-shadow:
+        inset 0 1px 0 var(--innerlight),
+        0 0 0 1px var(--hairline),
+        0 24px 48px -28px rgba(10,10,10,0.18);
+      transition: transform 600ms var(--ease), box-shadow 600ms var(--ease);
+    }
+    .step-card:hover {
+      transform: translateY(-3px);
+      box-shadow:
+        inset 0 1px 0 var(--innerlight),
+        0 0 0 1px var(--hairline),
+        0 30px 70px -22px rgba(10,10,10,0.22);
+    }
+    .step-card .core {
+      border-radius: var(--core-radius);
+      background: #FCFCFA;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.85), inset 0 0 0 1px var(--hairline);
+      padding: 32px;
+      height: 100%;
+      display: flex; flex-direction: column;
+    }
+    .step-card .step-num {
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--sage); margin-bottom: 14px;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .step-card .step-num .check {
+      width: 16px; height: 16px; border-radius: 50%;
+      background: var(--sage);
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+    .step-card .step-num .check svg { width: 10px; height: 10px; stroke: white; fill: none; stroke-width: 2; }
+    .step-card h3 { font-size: 22px; font-weight: 700; letter-spacing: -0.025em; line-height: 1.1; margin: 0 0 10px; }
+    .step-card p { font-size: 14px; color: var(--muted); margin: 0; line-height: 1.55; max-width: 36ch; }
+    .step-card .quiz-tag {
+      margin-top: auto; padding-top: 20px;
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--sage);
+    }
+    .step-card .quiz-tag .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--sage); }
+
+    .span-3 { grid-column: span 3; }
+    .span-2 { grid-column: span 2; }
+    .span-4 { grid-column: span 4; }
+    .span-6 { grid-column: span 6; }
+    .row-2 { grid-row: span 2; }
+
+    /* ============ VIDEO COURSES ============ */
+    .courses-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; }
+    .course-card {
+      padding: 8px;
+      border-radius: var(--shell-radius);
+      background: rgba(255,255,255,0.5);
+      box-shadow:
+        inset 0 1px 0 var(--innerlight),
+        0 0 0 1px var(--hairline),
+        0 24px 48px -28px rgba(10,10,10,0.18);
+      transition: transform 600ms var(--ease), box-shadow 600ms var(--ease);
+    }
+    .course-card:hover {
+      transform: translateY(-3px);
+      box-shadow:
+        inset 0 1px 0 var(--innerlight),
+        0 0 0 1px var(--hairline),
+        0 30px 70px -22px rgba(10,10,10,0.22);
+    }
+    .course-card .core {
+      border-radius: var(--core-radius);
+      background: #FCFCFA;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.85), inset 0 0 0 1px var(--hairline);
+      padding: 28px;
+      height: 100%;
+      display: flex; flex-direction: column;
+    }
+    .course-card .thumb {
+      width: 100%; aspect-ratio: 16/9; border-radius: 16px;
+      background: linear-gradient(135deg, var(--canvas-2) 0%, #D8D6CE 100%);
+      margin-bottom: 18px;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .course-card .thumb .play {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(255,255,255,0.85);
+      box-shadow: 0 4px 12px rgba(10,10,10,0.15);
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 360ms var(--ease-spring);
+    }
+    .course-card:hover .thumb .play { transform: scale(1.1); }
+    .course-card .thumb .play svg { width: 16px; height: 16px; fill: var(--sage); margin-left: 2px; }
+    .course-card .thumb .duration {
+      position: absolute; bottom: 8px; right: 8px;
+      padding: 3px 8px; border-radius: 6px;
+      background: rgba(10,10,10,0.7); color: white;
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em;
+    }
+    .course-card .meta { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+    .course-card h3 { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; margin: 0 0 8px; }
+    .course-card p { font-size: 13.5px; color: var(--muted); margin: 0; line-height: 1.55; max-width: 34ch; }
+    .course-card .price {
+      margin-top: auto; padding-top: 16px;
+      font-size: 22px; font-weight: 700; letter-spacing: -0.03em; color: var(--sage);
+    }
+    .course-card .price small { font-size: 12px; color: var(--muted); font-weight: 500; margin-left: 4px; }
+
+    .course-card.dark .core {
+      background: linear-gradient(180deg, #1A1A1A 0%, #0F0F0F 100%);
+      color: #ECECEA;
+    }
+    .course-card.dark .core .meta { color: rgba(255,255,255,0.55); }
+    .course-card.dark .core p { color: rgba(255,255,255,0.6); }
+    .course-card.dark h3 { color: #FFFFFF; }
+    .course-card.dark .price { color: var(--gold); }
+    .course-card.dark .thumb {
+      background: linear-gradient(135deg, #2A2A28 0%, #1A1A18 100%);
+    }
+
+    /* ============ MARQUEE ============ */
+    .marquee {
+      padding: 56px 0;
+      overflow: hidden;
+      mask-image: linear-gradient(90deg, transparent, black 12%, black 88%, transparent);
+      -webkit-mask-image: linear-gradient(90deg, transparent, black 12%, black 88%, transparent);
+    }
+    .marquee-track {
+      display: flex; gap: 64px; width: max-content;
+      animation: track 32s linear infinite;
+      will-change: transform;
+    }
+    .marquee:hover .marquee-track { animation-play-state: paused; }
+    @keyframes track { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .marquee-item {
+      font-weight: 700; font-size: 22px; letter-spacing: -0.02em; color: var(--ink);
+      opacity: 0.55;
+      white-space: nowrap;
+    }
+    .marquee-item em { font-style: normal; color: var(--muted); margin: 0 12px; }
+
+    /* ============ CLOSING ============ */
+    .closing {
+      padding: 112px 0;
+      margin: 56px 28px 28px;
+      border-radius: 40px;
+      background: linear-gradient(180deg, #131313 0%, #050505 100%);
+      color: #F2F2F0;
+      position: relative; overflow: hidden;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.08),
+        0 30px 80px -40px rgba(10,10,10,0.6);
+    }
+    .closing::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(700px 360px at 30% 0%, rgba(90,140,122,0.32), transparent 70%);
+      pointer-events: none;
+    }
+    .closing-inner { position: relative; max-width: 1040px; padding: 0 32px; margin: 0 auto; text-align: center; }
+    .closing h2 { font-size: clamp(40px, 5.5vw, 76px); font-weight: 700; letter-spacing: -0.035em; line-height: 1; margin: 0 0 18px; max-width: 18ch; margin-inline: auto; }
+    .closing p { color: rgba(242,242,240,0.65); font-size: 17px; margin: 0 auto 32px; max-width: 48ch; line-height: 1.55; }
+    .closing .pill { background: var(--canvas); color: var(--ink); }
+    .closing .pill .icon-wrap { background: rgba(10,10,10,0.08); }
+
+    /* ============ FOOTER ============ */
+    footer {
+      padding: 36px 28px 28px;
+      font-family: var(--mono); font-size: 11px; color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+    footer .row { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; max-width: 1240px; margin: 0 auto; padding: 0 28px; }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--ink); }
+
+    /* ============ RESPONSIVE ============ */
+    @media (max-width: 980px) {
+      .hero { grid-template-columns: 1fr; padding-top: 64px; padding-bottom: 80px; }
+      .nav ul { display: none; }
+      .section-head { grid-template-columns: 1fr; gap: 18px; }
+      .path-steps { grid-template-columns: 1fr; }
+      .courses-grid { grid-template-columns: 1fr; }
+      .span-3, .span-2, .span-4, .span-6 { grid-column: span 1; }
+      .row-2 { grid-row: auto; }
+      .closing { margin: 28px 16px; padding: 80px 0; }
+    }
+
+    /* ============ MOTION ENTRY ============ */
+    .reveal { opacity: 0; transform: translateY(18px); filter: blur(6px); transition: opacity 800ms var(--ease), transform 800ms var(--ease), filter 800ms var(--ease); }
+    .reveal.is-in { opacity: 1; transform: none; filter: none; }
+    @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; filter: none; transition: none; } }
+  </style>
+</head>
+<body>
+  <div class="mesh" aria-hidden="true"></div>
+
+  <div class="nav-shell">
+    <header class="nav">
+      <span class="brand"><span class="brand-mark"></span>Brahmavidya</span>
+      <ul>
+        <li><a href="#path">El Camino</a></li>
+        <li><a href="#courses">Cursos</a></li>
+        <li><a href="#community">Comunidad</a></li>
+      </ul>
+      <button class="pill">
+        <span>Comenzar</span>
+        <span class="icon-wrap"><svg viewBox="0 0 12 12" stroke-width="1.6"><path d="M2.5 6h7M6 2.5L9.5 6 6 9.5"/></svg></span>
+      </button>
+    </header>
+  </div>
+
+  <main>
+    <!-- ====== HERO ====== -->
+    <section class="wrap hero reveal">
+      <div class="hero-copy">
+        <span class="eyebrow"><span class="dot"></span>Escuela Brahmavidya · Desde 2019</span>
+        <h1>El trabajo interior, <span class="soft">estructurado.</span></h1>
+        <p class="lede">Escuela Brahmavidya ofrece un camino guiado hacia el autoconocimiento — módulos de autorreflexión paso a paso verificados por nuestro equipo docente, más cursos en video profundos desde cultivo orgánico hasta maestría espiritual.</p>
+        <div class="actions">
+          <button class="pill">
+            <span>Inicia el camino</span>
+            <span class="icon-wrap"><svg viewBox="0 0 12 12" stroke-width="1.6"><path d="M2.5 6h7M6 2.5L9.5 6 6 9.5"/></svg></span>
+          </button>
+          <button class="ghost">Explora los cursos</button>
+        </div>
+      </div>
+
+      <aside class="hero-preview">
+        <div class="core">
+          <div class="preview-bar"><span></span><span></span><span></span></div>
+          <div class="preview-grid">
+            <div class="pv-cell span2">
+              <div class="meta">camino · paso 3 de 7</div>
+              <div class="row" style="justify-content: space-between;">
+                <div>
+                  <h4 style="font-size: 14px;">Observando el Flujo del Pensamiento</h4>
+                  <div class="row" style="margin-top: 4px;"><span class="pulse"></span><p style="margin:0; font-size: 11px;">en progreso · quiz pendiente</p></div>
+                </div>
+                <div class="progress-ring" aria-hidden="true"></div>
+              </div>
+            </div>
+            <div class="pv-cell">
+              <div class="meta">reflexiones</div>
+              <div class="num">12<small>de 28</small></div>
+            </div>
+            <div class="pv-cell">
+              <div class="meta">cursos</div>
+              <div class="num">4<small>inscritos</small></div>
+            </div>
+            <div class="pv-cell span2">
+              <div class="meta">última verificación</div>
+              <p style="font-size: 11.5px; line-height: 1.6;">
+                <code style="font-family: var(--mono); color: var(--sage);">09:42:17</code> · paso 2 <b>"Anclando el Cuerpo"</b> verificado por <b>maestra Elena R.</b> — aprobado con distinción.
+              </p>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- ====== PATH TO ENLIGHTENMENT ====== -->
+    <section class="block reveal" id="path">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow"><span class="dot"></span>01 · el camino</span>
+          <p>Siete etapas de autoindagación. Cada etapa contiene preguntas de autorreflexión — respondidas con honestidad, enviadas y verificadas por nuestro equipo docente antes de avanzar. Esto no es un examen. Es un espejo.</p>
+        </div>
+        <div class="section-head" style="margin-bottom: 56px;">
+          <h2>Un currículum para el trabajo <em style="font-weight:500; color: var(--muted); font-style: normal;">invisible.</em></h2>
+          <span></span>
+        </div>
+
+        <div class="path-steps">
+          <div class="step-card span-3 row-2">
+            <div class="core">
+              <div class="step-num"><span class="check"><svg viewBox="0 0 12 12"><path d="M2.5 6l3 3 4-5"/></svg></span>01 · completado</div>
+              <h3>Anclando el Cuerpo</h3>
+              <p>Comienza donde estás — en la carne. Conciencia de la respiración, postura, la sensación vivida de estar vivo. Cuatro preguntas de reflexión sobre la presencia antes del pensamiento.</p>
+              <div class="quiz-tag"><span class="dot"></span>4 reflexiones · verificada</div>
+            </div>
+          </div>
+          <div class="step-card span-3">
+            <div class="core">
+              <div class="step-num"><span class="check"><svg viewBox="0 0 12 12"><path d="M2.5 6l3 3 4-5"/></svg></span>02 · completado</div>
+              <h3>Observando el Flujo del Pensamiento</h3>
+              <p>Observa los pensamientos surgir sin identificarte. Cinco preguntas sobre la brecha entre pensador y pensamiento.</p>
+              <div class="quiz-tag"><span class="dot"></span>5 reflexiones · verificada</div>
+            </div>
+          </div>
+          <div class="step-card span-3">
+            <div class="core">
+              <div class="step-num">03 · en progreso</div>
+              <h3>Disolviendo el Nudo del Ego</h3>
+              <p>¿Dónde vive el "yo"? Rastrea el sentido del self hasta su origen. Seis preguntas sobre identidad, apego y soltar.</p>
+              <div class="quiz-tag"><span class="dot"></span>6 reflexiones · 3 enviadas</div>
+            </div>
+          </div>
+          <div class="step-card span-2">
+            <div class="core">
+              <div class="step-num">04 · bloqueado</div>
+              <h3>Apertura del Corazón</h3>
+              <p>La compasión como indagación, no como sentimiento.</p>
+              <div class="quiz-tag"><span class="dot"></span>5 reflexiones</div>
+            </div>
+          </div>
+          <div class="step-card span-2">
+            <div class="core">
+              <div class="step-num">05 · bloqueado</div>
+              <h3>El Silencio como Maestro</h3>
+              <p>Sentarse en silencio prolongado. Sin otra pregunta que la respiración.</p>
+              <div class="quiz-tag"><span class="dot"></span>3 reflexiones</div>
+            </div>
+          </div>
+          <div class="step-card span-2">
+            <div class="core">
+              <div class="step-num">06 · bloqueado</div>
+              <h3>Vivir las Preguntas</h3>
+              <p>Integración en la acción cotidiana.</p>
+              <div class="quiz-tag"><span class="dot"></span>4 reflexiones</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== VIDEO COURSES ====== -->
+    <section class="block reveal" id="courses">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow"><span class="dot"></span>02 · cursos</span>
+          <p>Cursos en video profundos impartidos por guías con experiencia. Desde prácticas de cultivo orgánico hasta maestría espiritual avanzada — cada curso es un currículum completo, no un adelanto.</p>
+        </div>
+        <div class="section-head" style="margin-bottom: 56px;">
+          <h2>Estudia a la profundidad <em style="font-weight:500; color: var(--muted); font-style: normal;">para la que estás listo.</em></h2>
+          <span></span>
+        </div>
+
+        <div class="courses-grid">
+          <div class="course-card span-4 row-2">
+            <div class="core">
+              <div class="thumb">
+                <div class="play"><svg viewBox="0 0 16 16"><path d="M4 2l10 6-10 6z"/></svg></div>
+                <span class="duration">12h 40m</span>
+              </div>
+              <div class="meta">destacado · maestría espiritual</div>
+              <h3>Los Upanishads: Una Lectura Completa</h3>
+              <p>Doce sesiones recorriendo los Upanishads principales con glosas en sánscrito, filosofía comparada y contemplación guiada después de cada capítulo.</p>
+              <div class="price">$89<small>USD · acceso de por vida</small></div>
+            </div>
+          </div>
+          <div class="course-card span-2">
+            <div class="core">
+              <div class="thumb">
+                <div class="play"><svg viewBox="0 0 16 16"><path d="M4 2l10 6-10 6z"/></svg></div>
+                <span class="duration">6h 15m</span>
+              </div>
+              <div class="meta">cultivo orgánico</div>
+              <h3>Fundamentos de Pranayama</h3>
+              <p>La respiración como puente entre cuerpo y mente. Seis técnicas progresivas.</p>
+              <div class="price">$49<small>USD</small></div>
+            </div>
+          </div>
+          <div class="course-card span-2 dark">
+            <div class="core">
+              <div class="thumb">
+                <div class="play"><svg viewBox="0 0 16 16"><path d="M4 2l10 6-10 6z"/></svg></div>
+                <span class="duration">8h 30m</span>
+              </div>
+              <div class="meta">avanzado</div>
+              <h3>Indagación No-Dual</h3>
+              <p>Atma Vichara — autoindagación en la tradición de Ramana Maharshi.</p>
+              <div class="price">$69<small>USD</small></div>
+            </div>
+          </div>
+          <div class="course-card span-2">
+            <div class="core">
+              <div class="thumb">
+                <div class="play"><svg viewBox="0 0 16 16"><path d="M4 2l10 6-10 6z"/></svg></div>
+                <span class="duration">4h 50m</span>
+              </div>
+              <div class="meta">cultivo orgánico</div>
+              <h3>Práctica de Yoga Nidra</h3>
+              <p>Sueño profundo consciente. Sesiones guiadas para restauración e introspección.</p>
+              <div class="price">$39<small>USD</small></div>
+            </div>
+          </div>
+          <div class="course-card span-2">
+            <div class="core">
+              <div class="thumb">
+                <div class="play"><svg viewBox="0 0 16 16"><path d="M4 2l10 6-10 6z"/></svg></div>
+                <span class="duration">5h 20m</span>
+              </div>
+              <div class="meta">maestría espiritual</div>
+              <h3>Esenciales del Bhagavad Gita</h3>
+              <p>Karma, bhakti, jnana — los tres caminos mapeados para la vida moderna.</p>
+              <div class="price">$59<small>USD</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== MARQUEE ====== -->
+    <section class="marquee reveal" id="community">
+      <div class="marquee-track">
+        <span class="marquee-item">Vedanta Society<em>·</em>Ramakrishna Mission<em>·</em>Chinmaya<em>·</em>Art of Living<em>·</em>Isha Foundation<em>·</em>Bihar School of Yoga<em>·</em>Kaivalyadhama<em>·</em>Sivananda<em>·</em></span>
+        <span class="marquee-item" aria-hidden="true">Vedanta Society<em>·</em>Ramakrishna Mission<em>·</em>Chinmaya<em>·</em>Art of Living<em>·</em>Isha Foundation<em>·</em>Bihar School of Yoga<em>·</em>Kaivalyadhama<em>·</em>Sivananda<em>·</em></span>
+      </div>
+    </section>
+
+    <!-- ====== CLOSING ====== -->
+    <section class="closing reveal">
+      <div class="closing-inner">
+        <h2>Comienza donde estás. El camino ya está bajo tus pies.</h2>
+        <p>El registro gratuito desbloquea las dos primeras etapas del Camino. Acceso completo a las siete etapas y la videoteca — $12/mes o $99/año.</p>
+        <button class="pill">
+          <span>Crea tu cuenta</span>
+          <span class="icon-wrap"><svg viewBox="0 0 12 12" stroke-width="1.6"><path d="M2.5 6h7M6 2.5L9.5 6 6 9.5"/></svg></span>
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="row">
+      <span>Escuela Brahmavidya · v2026.05</span>
+      <span><a href="#">El Camino</a> · <a href="#">Cursos</a> · <a href="#">Comunidad</a> · <a href="#">Privacidad</a> · <a href="#">Contacto</a></span>
+    </div>
+  </footer>
+
+  <script>
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+      }
+    }, { threshold: 0.1, rootMargin: '0px 0px -10% 0px' });
+    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+  </script>
+</body>
+</html>

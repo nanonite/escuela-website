@@ -1,0 +1,28 @@
+node_modules/
+.next/
+.pnpm-store/
+.od/
+.sbx/
+.chainlink/
+.env
+*.log
+.npmrc
+.opencode/
+.vscode/
+.gitmodules
+open-design/
+# Sandbox / local dev infrastructure
+Dockerfile.template
+docker-compose.yml
+verdaccio-config.yaml
+lock-npmjs.sh
+unlock-npmjs.sh
+unlock-and-inspect.sh
+opencode-wrapper.sh
+tmux-boot.sh
+# Planning docs
+CHANGELOG.md
+MILESTONE-1-SUMMARY.md
+PLAN.md
+PREFLIGHT.md
+WORKFLOW.md

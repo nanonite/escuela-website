@@ -1,0 +1,17 @@
+node_modules
+.next
+.git
+.gitignore
+.dockerignore
+.npmrc
+.opencode
+.vscode
+*.md
+Dockerfile
+Dockerfile.template
+docker-compose.yml
+verdaccio-config.yaml
+*.sh
+open-design
+.od
+.sbx
