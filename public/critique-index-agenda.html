@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Critique - Escuela Brahmavidya Web Outputs</title>
+  <style>
+    :root {
+      --bg: #FAF7F0;
+      --panel: #ffffff;
+      --ink: #1A1410;
+      --muted: #6B5D52;
+      --line: rgba(26,20,16,0.14);
+      --sage: #2A5F4A;
+      --gold: #B8920A;
+      --terra: #9B4520;
+      --pale: #F0E9DC;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    main { max-width: 1120px; margin: 0 auto; padding: 48px 28px 72px; }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 28px;
+      margin-bottom: 32px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 28px;
+      align-items: end;
+    }
+    .kicker {
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 11px;
+      color: var(--sage);
+      font-weight: 700;
+    }
+    h1 {
+      margin: 10px 0 12px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(40px, 6vw, 72px);
+      line-height: 0.98;
+      letter-spacing: -0.02em;
+    }
+    .verdict {
+      margin: 0;
+      max-width: 68ch;
+      color: var(--muted);
+      font-size: 18px;
+    }
+    .meta {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 14px;
+      padding: 18px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .meta strong { color: var(--ink); }
+    .overview {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 28px;
+      margin-bottom: 32px;
+      align-items: center;
+    }
+    .chart {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 20px;
+    }
+    .score-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+    }
+    .score-tile {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px;
+      min-height: 116px;
+    }
+    .score-tile b {
+      display: block;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 34px;
+      line-height: 1;
+      color: var(--sage);
+    }
+    .score-tile span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin: 28px 0;
+    }
+    article, .actions {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 22px;
+    }
+    article h2, .actions h2 {
+      margin: 0 0 10px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 28px;
+      line-height: 1.1;
+    }
+    .band {
+      display: inline-flex;
+      gap: 8px;
+      align-items: baseline;
+      margin-bottom: 12px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .band strong { color: var(--sage); font-size: 22px; }
+    p { margin: 0 0 14px; }
+    ul { margin: 0; padding-left: 20px; }
+    li { margin: 8px 0; }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.92em;
+      background: var(--pale);
+      padding: 1px 5px;
+      border-radius: 5px;
+    }
+    .triad {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .check li { list-style: none; margin-left: -20px; }
+    .check li::before {
+      content: "";
+      display: inline-block;
+      width: 13px;
+      height: 13px;
+      border: 1px solid var(--muted);
+      border-radius: 3px;
+      margin-right: 8px;
+      transform: translateY(2px);
+    }
+    @media (max-width: 860px) {
+      header, .overview, .cards, .triad { grid-template-columns: 1fr; }
+      .score-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div>
+        <div class="kicker">OD critique skill - 5 dimension review</div>
+        <h1>Escuela Brahmavidya web outputs</h1>
+        <p class="verdict">Strong brand coherence and a useful agenda concept, held back by unfinished interactions, mobile navigation gaps, and a few design-system violations that make the surface feel less production-ready than the visual direction suggests.</p>
+      </div>
+      <div class="meta">
+        <p><strong>Artifacts reviewed:</strong> <code>public/index.html</code> and <code>public/agenda-2026.html</code></p>
+        <p><strong>Date:</strong> 2026-06-04</p>
+        <p><strong>Reviewer:</strong> OD - Critique skill</p>
+      </div>
+    </header>
+
+    <section class="overview" aria-label="Score overview">
+      <div class="chart">
+        <svg viewBox="0 0 360 360" role="img" aria-label="Radar chart of five design critique scores">
+          <g transform="translate(180 180)">
+            <polygon points="0,-140 133,-43 82,113 -82,113 -133,-43" fill="none" stroke="rgba(26,20,16,0.16)"/>
+            <polygon points="0,-105 100,-32 62,85 -62,85 -100,-32" fill="none" stroke="rgba(26,20,16,0.12)"/>
+            <polygon points="0,-70 67,-22 41,57 -41,57 -67,-22" fill="none" stroke="rgba(26,20,16,0.10)"/>
+            <polygon points="0,-35 33,-11 21,28 -21,28 -33,-11" fill="none" stroke="rgba(26,20,16,0.08)"/>
+            <line x1="0" y1="0" x2="0" y2="-140" stroke="rgba(26,20,16,0.12)"/>
+            <line x1="0" y1="0" x2="133" y2="-43" stroke="rgba(26,20,16,0.12)"/>
+            <line x1="0" y1="0" x2="82" y2="113" stroke="rgba(26,20,16,0.12)"/>
+            <line x1="0" y1="0" x2="-82" y2="113" stroke="rgba(26,20,16,0.12)"/>
+            <line x1="0" y1="0" x2="-133" y2="-43" stroke="rgba(26,20,16,0.12)"/>
+            <polygon points="0,-105 93,-30 49,68 -49,68 -80,-26" fill="rgba(42,95,74,0.24)" stroke="#2A5F4A" stroke-width="3"/>
+            <circle cx="0" cy="-105" r="4" fill="#2A5F4A"/>
+            <circle cx="93" cy="-30" r="4" fill="#2A5F4A"/>
+            <circle cx="49" cy="68" r="4" fill="#2A5F4A"/>
+            <circle cx="-49" cy="68" r="4" fill="#2A5F4A"/>
+            <circle cx="-80" cy="-26" r="4" fill="#2A5F4A"/>
+          </g>
+          <text x="180" y="18" text-anchor="middle" font-size="12" fill="#6B5D52">Philosophy</text>
+          <text x="340" y="126" text-anchor="end" font-size="12" fill="#6B5D52">Hierarchy</text>
+          <text x="288" y="330" text-anchor="middle" font-size="12" fill="#6B5D52">Detail</text>
+          <text x="72" y="330" text-anchor="middle" font-size="12" fill="#6B5D52">Function</text>
+          <text x="20" y="126" text-anchor="start" font-size="12" fill="#6B5D52">Innovation</text>
+        </svg>
+      </div>
+      <div class="score-grid">
+        <div class="score-tile"><b>7.5</b><span>Philosophy consistency<br>Strong</span></div>
+        <div class="score-tile"><b>7.0</b><span>Visual hierarchy<br>Strong</span></div>
+        <div class="score-tile"><b>5.8</b><span>Detail execution<br>Functional</span></div>
+        <div class="score-tile"><b>5.8</b><span>Functionality<br>Functional</span></div>
+        <div class="score-tile"><b>6.0</b><span>Innovation<br>Functional</span></div>
+      </div>
+    </section>
+
+    <section class="cards">
+      <article>
+        <h2>Philosophy Consistency</h2>
+        <div class="band"><strong>7.5 / 10</strong> Strong</div>
+        <p>The brand system is clear: both files share the cream, sage, gold, terra palette and the Cormorant/DM Sans/JetBrains roles from <code>DESIGN.md</code>, with matching header, banner, section-label, and course-card vocabulary. Drift appears where the code invents values outside the token set: pure white surfaces at <code>index.html:203</code> and <code>agenda-2026.html:325</code>, dark gradient values at <code>index.html:341</code>, and pill filters at <code>agenda-2026.html:435</code> despite the design system banning pill-shaped primary controls.</p>
+        <ul>
+          <li><strong>Keep:</strong> The contemplative editorial direction and Spanish tone stay coherent across both pages.</li>
+          <li><strong>Fix:</strong> Replace invented whites, darks, and pill radii with approved tokens.</li>
+          <li><strong>Quick win:</strong> Add <code>--ink-2</code> from <code>DESIGN.md</code> and remove hard-coded inline colors.</li>
+        </ul>
+      </article>
+
+      <article>
+        <h2>Visual Hierarchy</h2>
+        <div class="band"><strong>7.0 / 10</strong> Strong</div>
+        <p>The landing hierarchy is readable: the hero at <code>index.html:609-650</code> gives the H1, lede, CTAs, and stat sidebar distinct weight, while the Camino split at <code>index.html:655-718</code> cleanly separates explanation from progression. The agenda page is more utilitarian and works at the component level, but the 160px placeholder banner at <code>agenda-2026.html:567-575</code> dominates the first viewport before the actual page task appears, and the tab bar becomes another sticky layer under the nav at <code>agenda-2026.html:178-185</code>.</p>
+        <ul>
+          <li><strong>Keep:</strong> Serif display headings, mono section labels, and restrained CTAs establish clear reading tiers.</li>
+          <li><strong>Fix:</strong> Reduce or visually subordinate the placeholder banner when the page is being evaluated as a live design.</li>
+          <li><strong>Quick win:</strong> Give the agenda header a compact summary row so users know what the calendar contains before scrolling.</li>
+        </ul>
+      </article>
+
+      <article>
+        <h2>Detail Execution</h2>
+        <div class="band"><strong>5.8 / 10</strong> Functional</div>
+        <p>Spacing and card structure are mostly tidy, especially the step rows at <code>index.html:667-714</code> and event cards at <code>agenda-2026.html:352-389</code>. The misses are visible to an expert eye: many component styles are repeated between files instead of shared, inline styles appear in content blocks like <code>index.html:633-640</code> and <code>agenda-2026.html:961</code>, transition timing often uses <code>ease</code> or <code>linear</code> instead of the prescribed cubic-bezier, and the landing mini-calendar is hand-coded with an incorrect June 2026 offset at <code>index.html:743-747</code>.</p>
+        <ul>
+          <li><strong>Keep:</strong> The event dot/chip language is precise and easy to scan.</li>
+          <li><strong>Fix:</strong> Extract shared CSS and remove inline style patches before this grows into a maintenance problem.</li>
+          <li><strong>Quick win:</strong> Correct the mini-calendar preview or render it from the same event data as the agenda page.</li>
+        </ul>
+      </article>
+
+      <article>
+        <h2>Functionality</h2>
+        <div class="band"><strong>5.8 / 10</strong> Functional</div>
+        <p>The agenda calendar is the strongest functional piece: it renders month grids, event counts, selected-day details, filters courses, and initializes from a fixed <code>TODAY</code> value at <code>agenda-2026.html:832-991</code>. But many user-facing commands are inert buttons: <code>Comenzar</code>, <code>Inicia el camino</code>, <code>Explorar cursos</code>, <code>Ver</code>, and <code>Inscribirse</code> do not navigate or submit. Mobile hides the nav at <code>index.html:562</code> and <code>agenda-2026.html:553</code> without a replacement, and <code>changeMonth</code> can leave the promised Jan-Dec 2026 scope at <code>agenda-2026.html:889-896</code>.</p>
+        <ul>
+          <li><strong>Keep:</strong> Calendar day selection and course filtering are useful, concrete interactions.</li>
+          <li><strong>Fix:</strong> Convert inert buttons to links or wire them to real flows.</li>
+          <li><strong>Quick win:</strong> Disable previous on January and next on December to honor the 2026-only brief.</li>
+        </ul>
+      </article>
+
+      <article>
+        <h2>Innovation</h2>
+        <div class="band"><strong>6.0 / 10</strong> Functional</div>
+        <p>The work is tasteful but conservative. The best distinctive move is the agenda dark band on the landing page at <code>index.html:340-405</code>, which turns the calendar preview into a memorable editorial interruption. The rest relies on familiar premium-site patterns: stat cards, three course cards, sticky nav, tabbed calendar, and marquee. Those are appropriate for the school, but not yet surprising enough to make the design feel unmistakably owned.</p>
+        <ul>
+          <li><strong>Keep:</strong> The dark agenda band creates contrast without becoming tech-startup dark mode.</li>
+          <li><strong>Fix:</strong> Give one core brand idea a custom visual treatment instead of relying on generic cards.</li>
+          <li><strong>Quick win:</strong> Replace course thumbnail gradients with quiet symbolic or photographic assets tied to each practice.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="triad">
+      <div class="actions">
+        <h2>Keep</h2>
+        <ul class="check">
+          <li>The shared banner/header/page rhythm across both files.</li>
+          <li>The Cormorant/DM Sans/JetBrains type hierarchy from the design system.</li>
+          <li>The agenda color taxonomy: sage for meditation, gold for course starts, terra for retreats.</li>
+          <li>The landing page's Camino split layout and agenda dark band.</li>
+        </ul>
+      </div>
+      <div class="actions">
+        <h2>Fix</h2>
+        <ul class="check">
+          <li>Wire or replace all inert CTA buttons with real links or handlers.</li>
+          <li>Add a mobile navigation affordance instead of hiding the nav entirely.</li>
+          <li>Clamp agenda month navigation to January through December 2026.</li>
+          <li>Remove token violations: pure white, invented dark gradient colors, and 999px pill filters.</li>
+          <li>Correct the landing mini-calendar's June 2026 layout.</li>
+        </ul>
+      </div>
+      <div class="actions">
+        <h2>Quick Wins</h2>
+        <ul class="check">
+          <li>Change <code>button</code> CTAs that navigate into <code>a</code> elements with real destinations.</li>
+          <li>Use the same calendar renderer for the landing preview and agenda page.</li>
+          <li>Swap <code>#fff</code> for an approved cream token or add a documented elevated-surface token.</li>
+          <li>Replace <code>transition: all</code>, <code>ease</code>, and <code>linear</code> with the motion token from <code>DESIGN.md</code>.</li>
+          <li>Remove inline styles from stat cards and course metadata into named classes.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

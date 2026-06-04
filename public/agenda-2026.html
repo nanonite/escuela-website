@@ -1,0 +1,1069 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Agenda 2026 — Escuela Brahmavidya</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream:      #FAF7F0;
+      --cream-2:    #F0E9DC;
+      --cream-3:    #E8DDD0;
+      --ink:        #1A1410;
+      --muted:      #6B5D52;
+      --muted-lt:   #9E8F84;
+      --hairline:   rgba(26,20,16,0.10);
+      --hairline-2: rgba(26,20,16,0.16);
+      --sage:       #2A5F4A;
+      --sage-lt:    #3A7860;
+      --sage-pale:  #EBF2EE;
+      --gold:       #B8920A;
+      --gold-pale:  #FDF8E6;
+      --terra:      #9B4520;
+      --terra-pale: #FAF0EB;
+      --elevated:   #FFFFFF;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans:  'DM Sans', system-ui, sans-serif;
+      --mono:  'JetBrains Mono', 'Courier New', monospace;
+      --r-sm: 8px;
+      --r-md: 14px;
+      --r-lg: 24px;
+      --ease-out: cubic-bezier(0.16,1,0.3,1);
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+
+    /* ── BANNER SLOT ── */
+    .banner-slot {
+      width: 100%;
+      min-height: 160px;
+      background: var(--cream-2);
+      border-bottom: 2px dashed var(--hairline-2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .banner-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      color: var(--muted-lt);
+      text-align: center;
+    }
+    .banner-placeholder svg {
+      width: 32px; height: 32px;
+      stroke: var(--muted-lt); fill: none;
+      opacity: 0.5;
+    }
+    .banner-placeholder span {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    /* ── STICKY NAV ── */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(250,247,240,0.94);
+      backdrop-filter: saturate(160%) blur(18px);
+      -webkit-backdrop-filter: saturate(160%) blur(18px);
+      border-bottom: 1px solid var(--hairline);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+      gap: 24px;
+    }
+    .brand {
+      font-family: var(--serif);
+      font-size: 21px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      white-space: nowrap;
+    }
+    .brand-mark { width: 9px; height: 9px; border-radius: 50%; background: var(--sage); flex-shrink: 0; }
+    .site-nav {
+      display: flex; align-items: center; gap: 2px;
+      list-style: none; margin: 0; padding: 0;
+    }
+    .site-nav a {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: var(--r-sm);
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--muted);
+      transition: color 200ms var(--ease-out), background 200ms var(--ease-out);
+    }
+    .site-nav a:hover { color: var(--ink); background: var(--cream-2); }
+    .site-nav a.active { color: var(--sage); font-weight: 500; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 10px 22px;
+      border-radius: var(--r-md);
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      transition: background 200ms var(--ease-out), transform 150ms var(--ease-out);
+      white-space: nowrap;
+      text-decoration: none;
+    }
+    .btn-primary { background: var(--sage); color: #fff; }
+    .btn-primary:hover { background: var(--sage-lt); }
+    .btn-primary:active { transform: scale(0.98); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--hairline-2);
+    }
+    .btn-ghost:hover { background: var(--cream-2); color: var(--ink); }
+
+    /* ── MOBILE NAV ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 36px; height: 36px;
+      padding: 6px;
+      border: 1px solid var(--hairline-2);
+      border-radius: var(--r-sm);
+      background: transparent;
+      cursor: pointer;
+    }
+    .hamburger span {
+      display: block;
+      height: 1.5px;
+      background: var(--ink);
+      border-radius: 2px;
+      transition: transform 250ms var(--ease-out), opacity 200ms var(--ease-out);
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      background: rgba(250,247,240,0.98);
+      backdrop-filter: blur(18px);
+      border-top: 1px solid var(--hairline);
+      padding: 12px 20px 20px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      display: block;
+      padding: 13px 0;
+      border-bottom: 1px solid var(--hairline);
+      font-size: 16px;
+      color: var(--muted);
+      transition: color 150ms var(--ease-out);
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu a:hover { color: var(--ink); }
+
+    /* ── PAGE HEADER ── */
+    .page-hero {
+      padding: 64px 0 48px;
+      border-bottom: 1px solid var(--hairline);
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 16px;
+    }
+    .eyebrow .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--sage); flex-shrink: 0; }
+    .page-hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(42px, 5vw, 64px);
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      line-height: 1.05;
+      margin: 0 0 12px;
+    }
+    .page-hero p {
+      color: var(--muted);
+      font-size: 17px;
+      max-width: 52ch;
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    /* ── TABS ── */
+    .tabs-bar {
+      border-bottom: 1px solid var(--hairline);
+      background: var(--cream);
+      position: sticky;
+      top: 68px;
+      z-index: 40;
+    }
+    .tabs-inner {
+      display: flex;
+      gap: 0;
+    }
+    .tab-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 24px;
+      border: none;
+      background: transparent;
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--muted);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      transition: color 180ms, border-color 180ms;
+    }
+    .tab-btn:hover { color: var(--ink); }
+    .tab-btn.active { color: var(--sage); border-bottom-color: var(--sage); }
+    .tab-btn .tab-count {
+      font-family: var(--mono);
+      font-size: 9.5px;
+      letter-spacing: 0.1em;
+      padding: 2px 7px;
+      border-radius: 4px;
+      background: var(--cream-2);
+      color: var(--muted-lt);
+    }
+    .tab-btn.active .tab-count { background: var(--sage-pale); color: var(--sage); }
+
+    /* ── TAB CONTENT ── */
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ── CALENDAR PANEL ── */
+    .cal-layout {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 32px;
+      padding: 40px 0 80px;
+      align-items: start;
+    }
+
+    /* month nav */
+    .month-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .month-nav h2 {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin: 0;
+    }
+    .month-nav-btns { display: flex; gap: 6px; }
+    .nav-btn {
+      width: 34px; height: 34px;
+      border-radius: var(--r-sm);
+      border: 1px solid var(--hairline-2);
+      background: var(--cream);
+      color: var(--muted);
+      font-size: 16px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 200ms var(--ease-out), color 200ms var(--ease-out);
+    }
+    .nav-btn:hover:not(:disabled) { background: var(--cream-2); color: var(--ink); }
+    .nav-btn:disabled { opacity: 0.30; cursor: not-allowed; }
+
+    /* calendar grid */
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 2px;
+    }
+    .cal-head {
+      text-align: center;
+      font-family: var(--mono);
+      font-size: 9.5px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted-lt);
+      padding: 8px 0 12px;
+    }
+    .cal-cell {
+      aspect-ratio: 1;
+      border-radius: var(--r-sm);
+      padding: 6px;
+      cursor: pointer;
+      position: relative;
+      transition: background 150ms;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .cal-cell:hover { background: var(--cream-2); }
+    .cal-cell.other-month { opacity: 0.3; pointer-events: none; }
+    .cal-cell.today { background: var(--sage-pale); }
+    .cal-cell.selected { background: var(--sage); }
+    .cal-cell.selected .day-num { color: #fff; }
+    .cal-cell.has-event::after {
+      content: '';
+      display: block;
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--sage);
+      position: absolute;
+      bottom: 6px; left: 50%; transform: translateX(-50%);
+    }
+    .cal-cell.has-event.selected::after { background: rgba(255,255,255,0.6); }
+    .day-num {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink);
+      line-height: 1;
+    }
+    .cal-cell.today .day-num { color: var(--sage); font-weight: 600; }
+
+    /* event dots on cell */
+    .cell-dots {
+      display: flex; gap: 2px;
+      position: absolute;
+      bottom: 4px; left: 50%; transform: translateX(-50%);
+    }
+    .cell-dot {
+      width: 4px; height: 4px;
+      border-radius: 50%;
+    }
+    .cell-dot.sage  { background: var(--sage); }
+    .cell-dot.gold  { background: var(--gold); }
+    .cell-dot.terra { background: var(--terra); }
+
+    /* day events panel */
+    .day-panel {
+      background: var(--elevated);
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      position: sticky;
+      top: 130px;
+    }
+    .day-panel-head {
+      padding: 20px 22px 16px;
+      border-bottom: 1px solid var(--hairline);
+    }
+    .day-panel-head .dp-date {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted-lt);
+      margin-bottom: 4px;
+    }
+    .day-panel-head h3 {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 600;
+      margin: 0;
+      letter-spacing: -0.01em;
+    }
+    .day-events { padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+    .day-event {
+      padding: 14px 16px;
+      border-radius: var(--r-md);
+      border-left: 3px solid;
+      transition: background 150ms;
+    }
+    .day-event.sage  { border-color: var(--sage);  background: var(--sage-pale); }
+    .day-event.gold  { border-color: var(--gold);  background: var(--gold-pale); }
+    .day-event.terra { border-color: var(--terra); background: var(--terra-pale); }
+    .day-event:hover { filter: brightness(0.97); }
+    .event-time {
+      font-family: var(--mono);
+      font-size: 9.5px;
+      letter-spacing: 0.14em;
+      color: var(--muted-lt);
+      margin-bottom: 5px;
+    }
+    .event-title {
+      font-family: var(--serif);
+      font-size: 17px;
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+    .event-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
+    .event-badge {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .event-badge.sage  { background: rgba(42,95,74,0.12);  color: var(--sage); }
+    .event-badge.gold  { background: rgba(184,146,10,0.12); color: var(--gold); }
+    .event-badge.terra { background: rgba(155,69,32,0.12);  color: var(--terra); }
+
+    .no-events {
+      padding: 32px 22px;
+      text-align: center;
+      color: var(--muted-lt);
+      font-size: 14px;
+    }
+    .no-events svg {
+      width: 28px; height: 28px;
+      stroke: var(--muted-lt); fill: none;
+      opacity: 0.4;
+      display: block;
+      margin: 0 auto 10px;
+    }
+
+    /* legend */
+    .cal-legend {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--hairline);
+    }
+    .legend-item {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 12px; color: var(--muted);
+    }
+    .legend-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%; flex-shrink: 0;
+    }
+    .legend-dot.sage  { background: var(--sage); }
+    .legend-dot.gold  { background: var(--gold); }
+    .legend-dot.terra { background: var(--terra); }
+
+    /* ── COURSES PANEL ── */
+    .courses-panel { padding: 40px 0 80px; }
+    .courses-filter {
+      display: flex; gap: 8px; flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+    .filter-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 16px;
+      border-radius: var(--r-sm);
+      border: 1px solid var(--hairline-2);
+      background: transparent;
+      font-family: var(--sans);
+      font-size: 13px;
+      color: var(--muted);
+      cursor: pointer;
+      transition: background 200ms var(--ease-out), color 200ms var(--ease-out), border-color 200ms var(--ease-out);
+    }
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--sage);
+      border-color: var(--sage);
+      color: #fff;
+    }
+    .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .course-card {
+      background: var(--elevated);
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      transition: box-shadow 240ms var(--ease-out), transform 240ms var(--ease-out);
+    }
+    .course-card:hover {
+      box-shadow: 0 12px 36px -12px rgba(26,20,16,0.13);
+      transform: translateY(-2px);
+    }
+    .course-thumb {
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, var(--cream-2) 0%, var(--cream-3) 100%);
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .play-btn {
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.88);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 14px rgba(26,20,16,0.12);
+      transition: transform 280ms;
+    }
+    .course-card:hover .play-btn { transform: scale(1.08); }
+    .play-btn { transition: transform 280ms var(--ease-out); }
+    .play-btn svg { width: 17px; height: 17px; fill: var(--sage); margin-left: 3px; }
+    .dur-tag {
+      position: absolute; bottom: 8px; right: 8px;
+      font-family: var(--mono); font-size: 10px;
+      background: rgba(26,20,16,0.70); color: white;
+      padding: 3px 8px; border-radius: 5px;
+    }
+    .course-body { padding: 22px; }
+    .course-cat {
+      font-family: var(--mono);
+      font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--muted-lt); margin-bottom: 9px;
+    }
+    .course-body h3 {
+      font-family: var(--serif);
+      font-size: 21px; font-weight: 600;
+      letter-spacing: -0.01em; line-height: 1.15;
+      margin: 0 0 9px;
+    }
+    .course-body p {
+      font-size: 13.5px; color: var(--muted);
+      line-height: 1.6; margin: 0 0 14px;
+    }
+    .course-meta {
+      display: flex; align-items: center; gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    .course-tag {
+      font-family: var(--mono);
+      font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 3px 8px; border-radius: 4px;
+    }
+    .course-tag.inicio  { background: var(--gold-pale); color: var(--gold); }
+    .course-tag.abierto { background: var(--sage-pale); color: var(--sage); }
+    .course-footer { display: flex; align-items: center; justify-content: space-between; }
+    .course-price {
+      font-family: var(--serif);
+      font-size: 23px; font-weight: 600; color: var(--sage);
+    }
+    .course-price small {
+      font-family: var(--sans);
+      font-size: 12px; color: var(--muted-lt);
+      font-weight: 400; margin-left: 4px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--hairline);
+      padding: 28px 0;
+    }
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-copy {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      color: var(--muted-lt);
+    }
+    .footer-links { display: flex; gap: 18px; flex-wrap: wrap; }
+    .footer-links a { font-size: 13px; color: var(--muted); transition: color 150ms; }
+    .footer-links a:hover { color: var(--ink); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .cal-layout { grid-template-columns: 1fr; }
+      .day-panel { position: static; }
+      .courses-grid { grid-template-columns: 1fr; }
+      .site-nav { display: none; }
+      .hamburger { display: flex; }
+    }
+    @media (max-width: 600px) {
+      .wrap { padding: 0 20px; }
+      .page-hero h1 { font-size: 38px; }
+      .tab-btn { padding: 14px 16px; font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ BANNER SLOT ═══════════════════════════════════════════════
+       Replace this entire element when the custom banner arrives.
+  ════════════════════════════════════════════════════════════════ -->
+  <div class="banner-slot" id="banner-slot">
+    <div class="banner-placeholder">
+      <svg viewBox="0 0 24 24" stroke-width="1.5">
+        <rect x="2" y="6" width="20" height="12" rx="2"/>
+        <path d="M2 10h20"/>
+      </svg>
+      <span>Banner — diseño personalizado por incorporar</span>
+    </div>
+  </div>
+
+  <!-- ══ STICKY HEADER ═════════════════════════════════════════════ -->
+  <div class="site-header">
+    <div class="wrap">
+      <div class="header-inner">
+        <a href="index.html" class="brand">
+          <span class="brand-mark"></span>
+          Escuela Brahmavidya
+        </a>
+        <ul class="site-nav">
+          <li><a href="index.html#camino">El Camino</a></li>
+          <li><a href="agenda-2026.html" class="active">Agenda 2026</a></li>
+          <li><a href="index.html#cursos">Cursos</a></li>
+          <li><a href="index.html#comunidad">Comunidad</a></li>
+        </ul>
+        <a href="index.html#camino" class="btn btn-primary">Comenzar</a>
+        <button class="hamburger" id="hamburger" aria-label="Abrir menú" onclick="toggleMenu()">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <nav class="mobile-menu" id="mobile-menu">
+      <a href="index.html#camino"  onclick="toggleMenu()">El Camino</a>
+      <a href="agenda-2026.html"   onclick="toggleMenu()">Agenda 2026</a>
+      <a href="index.html#cursos"  onclick="toggleMenu()">Cursos</a>
+      <a href="index.html#comunidad" onclick="toggleMenu()">Comunidad</a>
+    </nav>
+  </div>
+
+  <main>
+
+    <!-- ══ PAGE HERO ═════════════════════════════════════════════════ -->
+    <div class="page-hero">
+      <div class="wrap">
+        <div class="eyebrow"><span class="dot"></span>Escuela Brahmavidya</div>
+        <h1>Agenda 2026</h1>
+        <p>Cursos, retiros, meditaciones grupales y eventos especiales a lo largo del año.</p>
+      </div>
+    </div>
+
+    <!-- ══ TABS ══════════════════════════════════════════════════════ -->
+    <div class="tabs-bar">
+      <div class="wrap">
+        <div class="tabs-inner">
+          <button class="tab-btn active" onclick="switchTab('calendar', this)">
+            Calendario de Eventos
+            <span class="tab-count" id="total-count">—</span>
+          </button>
+          <button class="tab-btn" onclick="switchTab('courses', this)">
+            Cursos Disponibles
+            <span class="tab-count">5</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ CALENDAR TAB ═══════════════════════════════════════════════ -->
+    <div id="tab-calendar" class="tab-panel active">
+      <div class="wrap">
+        <div class="cal-layout">
+          <!-- Left: calendar grid -->
+          <div>
+            <div class="month-nav">
+              <h2 id="month-title">Junio 2026</h2>
+              <div class="month-nav-btns">
+                <button class="nav-btn" data-dir="-1" onclick="changeMonth(-1)" title="Mes anterior">&#8592;</button>
+                <button class="nav-btn" data-dir="1"  onclick="changeMonth(1)"  title="Mes siguiente">&#8594;</button>
+              </div>
+            </div>
+            <div class="cal-grid" id="cal-grid">
+              <!-- rendered by JS -->
+            </div>
+            <div class="cal-legend">
+              <div class="legend-item"><span class="legend-dot sage"></span>Meditación / Satsang</div>
+              <div class="legend-item"><span class="legend-dot gold"></span>Inicio de curso</div>
+              <div class="legend-item"><span class="legend-dot terra"></span>Retiro / Especial</div>
+            </div>
+          </div>
+
+          <!-- Right: selected-day panel -->
+          <div class="day-panel" id="day-panel">
+            <div class="day-panel-head">
+              <div class="dp-date" id="dp-date">Selecciona un día</div>
+              <h3 id="dp-title">—</h3>
+            </div>
+            <div id="day-events-container">
+              <div class="no-events">
+                <svg viewBox="0 0 24 24" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                Haz clic en un día con eventos para ver los detalles.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ COURSES TAB ════════════════════════════════════════════════ -->
+    <div id="tab-courses" class="tab-panel">
+      <div class="wrap">
+        <div class="courses-panel">
+          <div class="courses-filter">
+            <button class="filter-btn active" onclick="filterCourses('all', this)">Todos</button>
+            <button class="filter-btn" onclick="filterCourses('maestria', this)">Maestría espiritual</button>
+            <button class="filter-btn" onclick="filterCourses('practica', this)">Práctica contemplativa</button>
+            <button class="filter-btn" onclick="filterCourses('avanzado', this)">Avanzado</button>
+          </div>
+          <div class="courses-grid" id="courses-grid">
+            <!-- rendered by JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ══ FOOTER ════════════════════════════════════════════════════════ -->
+  <footer>
+    <div class="wrap">
+      <div class="footer-row">
+        <span class="footer-copy">Escuela Brahmavidya · v2026.06</span>
+        <div class="footer-links">
+          <a href="index.html#camino">El Camino</a>
+          <a href="agenda-2026.html">Agenda 2026</a>
+          <a href="index.html#cursos">Cursos</a>
+          <a href="#">Privacidad</a>
+          <a href="#">Contacto</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── EVENT DATA ──────────────────────────────────────────────────
+    const EVENTS = {
+      '2026-01-03': [{ title: 'Meditación inaugural del año',        time: '09:00', type: 'sage', badge: 'Meditación',   desc: 'Meditación colectiva de apertura del año. Espacio abierto a todos.' }],
+      '2026-01-10': [{ title: 'Inicio — Anclando el Cuerpo',         time: '10:00', type: 'gold', badge: 'Inicio curso', desc: 'Primera generación del año del paso 1 del Camino.' }],
+      '2026-01-17': [{ title: 'Meditación grupal',                   time: '09:00', type: 'sage', badge: 'Meditación',   desc: 'Sesión semanal de meditación en silencio compartido.' }],
+      '2026-01-24': [{ title: 'Meditación grupal',                   time: '09:00', type: 'sage', badge: 'Meditación',   desc: 'Sesión semanal de meditación en silencio compartido.' }],
+      '2026-01-31': [{ title: 'Meditación grupal',                   time: '09:00', type: 'sage', badge: 'Meditación',   desc: 'Sesión semanal de meditación en silencio compartido.' }],
+
+      '2026-02-07': [{ title: 'Satsang — maestro invitado',          time: '18:00', type: 'sage', badge: 'Satsang',      desc: 'Charla y preguntas con maestro invitado de la tradición Vedanta.' }],
+      '2026-02-14': [{ title: 'Meditación grupal',                   time: '09:00', type: 'sage', badge: 'Meditación',   desc: 'Sesión semanal de meditación en silencio compartido.' }],
+      '2026-02-21': [{ title: 'Inicio — Fundamentos de Pranayama',   time: '10:00', type: 'gold', badge: 'Inicio curso', desc: 'Nueva generación del curso de respiración y pranayama.' }],
+      '2026-02-28': [{ title: 'Meditación grupal',                   time: '09:00', type: 'sage', badge: 'Meditación',   desc: 'Sesión semanal de meditación en silencio compartido.' }],
+
+      '2026-03-07': [{ title: 'Retiro de Equinoccio — Primavera',    time: '08:00', type: 'terra', badge: 'Retiro',      desc: 'Retiro de un día completo para marcar el equinoccio de primavera. Incluye meditación extendida, práctica de silencio y charla de cierre.' }],
+      '2026-03-14': [{ title: 'Meditación grupal',                   time: '09:00', type: 'sage', badge: 'Meditación',   desc: 'Sesión semanal de meditación en silencio compartido.' }],
+      '2026-03-21': [{ title: 'Inicio — Indagación No-Dual',         time: '10:00', type: 'gold', badge: 'Inicio curso', desc: 'Nueva generación del curso de autoindagación avanzado.' }],
+      '2026-03-28': [{ title: 'Meditación grupal',                   time: '09:00', type: 'sage', badge: 'Meditación',   desc: 'Sesión semanal de meditación en silencio compartido.' }],
+
+      '2026-04-04': [{ title: 'Meditación grupal',                   time: '09:00', type: 'sage', badge: 'Meditación',   desc: 'Sesión semanal de meditación en silencio compartido.' }],
+      '2026-04-11': [{ title: 'Satsang mensual',                     time: '18:00', type: 'sage', badge: 'Satsang',      desc: 'Charla y pregunta abierta con el equipo docente.' }],
+      '2026-04-18': [{ title: 'Inicio — Los Upanishads',             time: '10:00', type: 'gold', badge: 'Inicio curso', desc: 'Nueva generación del curso principal sobre los Upanishads.' }],
+      '2026-04-25': [{ title: 'Meditación grupal',                   time: '09:00', type: 'sage', badge: 'Meditación',   desc: 'Sesión semanal de meditación en silencio compartido.' }],
+
+      '2026-05-02': [{ title: 'Meditación grupal',                   time: '09:00', type: 'sage', badge: 'Meditación',   desc: 'Sesión semanal de meditación en silencio compartido.' }],
+      '2026-05-09': [{ title: 'Inicio — Yoga Nidra',                 time: '10:00', type: 'gold', badge: 'Inicio curso', desc: 'Nueva generación del curso de sueño consciente y restauración.' }],
+      '2026-05-16': [{ title: 'Meditación grupal',                   time: '09:00', type: 'sage', badge: 'Meditación',   desc: 'Sesión semanal de meditación en silencio compartido.' }],
+      '2026-05-23': [{ title: 'Retiro de Silencio — Primavera',      time: '08:00', type: 'terra', badge: 'Retiro',      desc: 'Retiro de un día en silencio completo. Solo para estudiantes activos del Camino.' }],
+      '2026-05-30': [{ title: 'Meditación grupal',                   time: '09:00', type: 'sage', badge: 'Meditación',   desc: 'Sesión semanal de meditación en silencio compartido.' }],
+
+      '2026-06-06': [{ title: 'Meditación grupal',                   time: '09:00', type: 'sage', badge: 'Meditación',   desc: 'Sesión semanal de meditación en silencio compartido.' }],
+      '2026-06-10': [{ title: 'Satsang mensual',                     time: '18:00', type: 'sage', badge: 'Satsang',      desc: 'Charla y pregunta abierta con el equipo docente.' }],
+      '2026-06-13': [{ title: 'Inicio — Indagación No-Dual',         time: '10:00', type: 'gold', badge: 'Inicio curso', desc: 'Nueva generación del curso de autoindagación. Abierto a inscripciones.' }],
+      '2026-06-17': [{ title: 'Meditación grupal',                   time: '09:00', type: 'sage', badge: 'Meditación',   desc: 'Sesión semanal de meditación en silencio compartido.' }],
+      '2026-06-20': [{ title: 'Retiro de Solsticio de Verano',       time: '08:00', type: 'terra', badge: 'Retiro',      desc: 'Retiro de un día para marcar el solsticio. Meditación al amanecer, práctica de silencio, charla de cierre y cena comunitaria.' }],
+      '2026-06-27': [{ title: 'Meditación grupal',                   time: '09:00', type: 'sage', badge: 'Meditación',   desc: 'Sesión semanal de meditación en silencio compartido.' }],
+
+      '2026-07-04': [{ title: 'Meditación grupal',                   time: '09:00', type: 'sage', badge: 'Meditación',   desc: 'Sesión semanal de meditación en silencio compartido.' }],
+      '2026-07-11': [{ title: 'Inicio — Esenciales del Bhagavad Gita', time: '10:00', type: 'gold', badge: 'Inicio curso', desc: 'Nueva generación del curso sobre los tres caminos del Gita.' }],
+      '2026-07-18': [{ title: 'Meditación grupal',                   time: '09:00', type: 'sage', badge: 'Meditación',   desc: 'Sesión semanal de meditación en silencio compartido.' }],
+      '2026-07-25': [{ title: 'Meditación grupal',                   time: '09:00', type: 'sage', badge: 'Meditación',   desc: 'Sesión semanal de meditación en silencio compartido.' }],
+
+      '2026-08-01': [{ title: 'Meditación grupal',                   time: '09:00', type: 'sage', badge: 'Meditación',   desc: 'Sesión semanal de meditación en silencio compartido.' }],
+      '2026-08-08': [{ title: 'Satsang — maestro invitado',          time: '18:00', type: 'sage', badge: 'Satsang',      desc: 'Charla especial de verano con maestro invitado.' }],
+      '2026-08-15': [{ title: 'Retiro de Silencio — Verano',         time: '08:00', type: 'terra', badge: 'Retiro',      desc: 'Retiro de dos días en silencio. Inscripción previa obligatoria.' }],
+      '2026-08-22': [{ title: 'Meditación grupal',                   time: '09:00', type: 'sage', badge: 'Meditación',   desc: 'Sesión semanal de meditación en silencio compartido.' }],
+      '2026-08-29': [{ title: 'Inicio — Fundamentos de Pranayama',   time: '10:00', type: 'gold', badge: 'Inicio curso', desc: 'Nueva generación del curso de respiración y pranayama.' }],
+
+      '2026-09-05': [{ title: 'Meditación grupal',                   time: '09:00', type: 'sage', badge: 'Meditación',   desc: 'Sesión semanal de meditación en silencio compartido.' }],
+      '2026-09-12': [{ title: 'Meditación grupal',                   time: '09:00', type: 'sage', badge: 'Meditación',   desc: 'Sesión semanal de meditación en silencio compartido.' }],
+      '2026-09-19': [{ title: 'Retiro de Equinoccio — Otoño',        time: '08:00', type: 'terra', badge: 'Retiro',      desc: 'Retiro de un día completo para el equinoccio de otoño.' }],
+      '2026-09-26': [{ title: 'Inicio — Los Upanishads',             time: '10:00', type: 'gold', badge: 'Inicio curso', desc: 'Nueva generación del curso principal del año.' }],
+
+      '2026-10-03': [{ title: 'Meditación grupal',                   time: '09:00', type: 'sage', badge: 'Meditación',   desc: 'Sesión semanal de meditación en silencio compartido.' }],
+      '2026-10-10': [{ title: 'Satsang mensual',                     time: '18:00', type: 'sage', badge: 'Satsang',      desc: 'Charla y pregunta abierta con el equipo docente.' }],
+      '2026-10-17': [{ title: 'Inicio — Yoga Nidra',                 time: '10:00', type: 'gold', badge: 'Inicio curso', desc: 'Nueva generación del curso de sueño consciente.' }],
+      '2026-10-24': [{ title: 'Meditación grupal',                   time: '09:00', type: 'sage', badge: 'Meditación',   desc: 'Sesión semanal de meditación en silencio compartido.' }],
+      '2026-10-31': [{ title: 'Meditación grupal',                   time: '09:00', type: 'sage', badge: 'Meditación',   desc: 'Sesión semanal de meditación en silencio compartido.' }],
+
+      '2026-11-07': [{ title: 'Meditación grupal',                   time: '09:00', type: 'sage', badge: 'Meditación',   desc: 'Sesión semanal de meditación en silencio compartido.' }],
+      '2026-11-14': [{ title: 'Inicio — Indagación No-Dual',         time: '10:00', type: 'gold', badge: 'Inicio curso', desc: 'Última generación del año del curso de autoindagación avanzado.' }],
+      '2026-11-21': [{ title: 'Retiro de Integración — Otoño',       time: '08:00', type: 'terra', badge: 'Retiro',      desc: 'Retiro de cierre de año de otoño. Para estudiantes activos.' }],
+      '2026-11-28': [{ title: 'Meditación grupal',                   time: '09:00', type: 'sage', badge: 'Meditación',   desc: 'Sesión semanal de meditación en silencio compartido.' }],
+
+      '2026-12-05': [{ title: 'Meditación grupal',                   time: '09:00', type: 'sage', badge: 'Meditación',   desc: 'Sesión semanal de meditación en silencio compartido.' }],
+      '2026-12-12': [{ title: 'Satsang de cierre — Año 2026',        time: '18:00', type: 'sage', badge: 'Satsang',      desc: 'Último satsang del año. Reflexión colectiva y cierre del ciclo.' }],
+      '2026-12-19': [{ title: 'Meditación grupal',                   time: '09:00', type: 'sage', badge: 'Meditación',   desc: 'Sesión semanal de meditación en silencio compartido.' }],
+      '2026-12-21': [{ title: 'Retiro de Solsticio de Invierno',     time: '08:00', type: 'terra', badge: 'Retiro',      desc: 'Retiro de cierre de año con meditación al amanecer, silencio y cena comunitaria de cierre.' }],
+    };
+
+    // ── COURSES DATA ─────────────────────────────────────────────────
+    const COURSES = [
+      {
+        id: 'upanishads',
+        title: 'Los Upanishads: Una Lectura Completa',
+        cat: 'Maestría espiritual · Destacado',
+        filter: 'maestria',
+        duration: '12h 40m',
+        desc: 'Doce sesiones recorriendo los Upanishads principales con glosas en sánscrito, filosofía comparada y contemplación guiada.',
+        price: '$89',
+        priceNote: 'USD · acceso de por vida',
+        status: 'abierto',
+        nextStart: 'Sep 26, 2026',
+      },
+      {
+        id: 'pranayama',
+        title: 'Fundamentos de Pranayama',
+        cat: 'Práctica contemplativa',
+        filter: 'practica',
+        duration: '6h 15m',
+        desc: 'La respiración como puente entre cuerpo y mente. Seis técnicas progresivas desde lo básico hasta retención avanzada.',
+        price: '$49',
+        priceNote: 'USD',
+        status: 'inicio',
+        nextStart: 'Ago 29, 2026',
+      },
+      {
+        id: 'nodual',
+        title: 'Indagación No-Dual',
+        cat: 'Avanzado',
+        filter: 'avanzado',
+        duration: '8h 30m',
+        desc: 'Atma Vichara — autoindagación en la tradición de Ramana Maharshi. Prerrequisito: paso 2 del Camino completado.',
+        price: '$69',
+        priceNote: 'USD',
+        status: 'inicio',
+        nextStart: 'Jun 13, 2026',
+      },
+      {
+        id: 'yoga-nidra',
+        title: 'Práctica de Yoga Nidra',
+        cat: 'Práctica contemplativa',
+        filter: 'practica',
+        duration: '4h 50m',
+        desc: 'Sueño profundo consciente. Sesiones guiadas para restauración profunda e introspección sin esfuerzo.',
+        price: '$39',
+        priceNote: 'USD',
+        status: 'abierto',
+        nextStart: 'Oct 17, 2026',
+      },
+      {
+        id: 'gita',
+        title: 'Esenciales del Bhagavad Gita',
+        cat: 'Maestría espiritual',
+        filter: 'maestria',
+        duration: '5h 20m',
+        desc: 'Karma, bhakti, jnana — los tres caminos mapeados para la vida cotidiana. Incluye lectura comentada de los capítulos centrales.',
+        price: '$59',
+        priceNote: 'USD',
+        status: 'inicio',
+        nextStart: 'Jul 11, 2026',
+      },
+    ];
+
+    // ── STATE ─────────────────────────────────────────────────────────
+    let currentYear  = 2026;
+    let currentMonth = 5; // 0-indexed → June
+    let selectedDate = null;
+    const TODAY = '2026-06-04';
+
+    // ── CALENDAR RENDER ───────────────────────────────────────────────
+    const MONTH_NAMES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
+                         'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+    const DAY_HEADS   = ['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'];
+
+    function pad(n) { return String(n).padStart(2,'0'); }
+    function dateKey(y,m,d) { return `${y}-${pad(m+1)}-${pad(d)}`; }
+
+    function updateNavBtns() {
+      const prevBtn = document.querySelector('.nav-btn[data-dir="-1"]');
+      const nextBtn = document.querySelector('.nav-btn[data-dir="1"]');
+      if (prevBtn) prevBtn.disabled = (currentYear === 2026 && currentMonth === 0);
+      if (nextBtn) nextBtn.disabled = (currentYear === 2026 && currentMonth === 11);
+    }
+
+    function renderCalendar() {
+      const grid  = document.getElementById('cal-grid');
+      const title = document.getElementById('month-title');
+      title.textContent = `${MONTH_NAMES[currentMonth]} ${currentYear}`;
+
+      const firstDay = new Date(currentYear, currentMonth, 1);
+      const lastDay  = new Date(currentYear, currentMonth + 1, 0);
+      const startDow = (firstDay.getDay() + 6) % 7; // Mon=0
+      const daysInMonth = lastDay.getDate();
+
+      let html = DAY_HEADS.map(d => `<div class="cal-head">${d}</div>`).join('');
+
+      // leading empty cells
+      for (let i = 0; i < startDow; i++) html += '<div class="cal-cell other-month"></div>';
+
+      for (let d = 1; d <= daysInMonth; d++) {
+        const key    = dateKey(currentYear, currentMonth, d);
+        const evList = EVENTS[key] || [];
+        const isToday    = key === TODAY;
+        const isSelected = key === selectedDate;
+
+        let cls = 'cal-cell';
+        if (isToday)    cls += ' today';
+        if (isSelected) cls += ' selected';
+        if (evList.length) cls += ' has-event';
+
+        const dots = evList.slice(0,3).map(e => `<span class="cell-dot ${e.type}"></span>`).join('');
+
+        html += `<div class="${cls}" onclick="selectDay('${key}', ${d})" title="${evList.map(e=>e.title).join(' · ') || ''}">
+          <span class="day-num">${d}</span>
+          ${evList.length ? `<div class="cell-dots">${dots}</div>` : ''}
+        </div>`;
+      }
+
+      grid.innerHTML = html;
+      updateNavBtns();
+
+      // update total count badge
+      const totalForMonth = Object.keys(EVENTS).filter(k =>
+        k.startsWith(`${currentYear}-${pad(currentMonth+1)}`)
+      ).reduce((acc, k) => acc + EVENTS[k].length, 0);
+      document.getElementById('total-count').textContent = totalForMonth || '—';
+    }
+
+    function changeMonth(delta) {
+      const newM = currentMonth + delta;
+      const newY = currentYear;
+      if (delta === -1 && newM < 0  && newY === 2026) return;
+      if (delta ===  1 && newM > 11 && newY === 2026) return;
+      currentMonth += delta;
+      if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+      if (currentMonth < 0)  { currentMonth = 11; currentYear--; }
+      selectedDate = null;
+      renderCalendar();
+      resetDayPanel();
+    }
+
+    // ── DAY PANEL ─────────────────────────────────────────────────────
+    const dayNamesEs = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+
+    function selectDay(key, day) {
+      selectedDate = key;
+      renderCalendar(); // re-render to show selection
+
+      const evList = EVENTS[key] || [];
+      const [y,m,d] = key.split('-').map(Number);
+      const dateObj  = new Date(y, m-1, d);
+      const dayName  = dayNamesEs[dateObj.getDay()];
+
+      document.getElementById('dp-date').textContent =
+        `${dayName}, ${d} de ${MONTH_NAMES[m-1]} ${y}`;
+      document.getElementById('dp-title').textContent =
+        evList.length ? (evList.length === 1 ? '1 evento' : `${evList.length} eventos`) : 'Sin eventos';
+
+      const container = document.getElementById('day-events-container');
+      if (!evList.length) {
+        container.innerHTML = `<div class="no-events">
+          <svg viewBox="0 0 24 24" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 3"/></svg>
+          No hay eventos programados para este día.
+        </div>`;
+        return;
+      }
+
+      container.innerHTML = `<div class="day-events">` +
+        evList.map(e => `
+          <div class="day-event ${e.type}">
+            <div class="event-time">${e.time} hrs</div>
+            <div class="event-title">${e.title}</div>
+            <div class="event-desc">${e.desc}</div>
+            <span class="event-badge ${e.type}">${e.badge}</span>
+          </div>
+        `).join('') +
+      `</div>`;
+    }
+
+    function resetDayPanel() {
+      document.getElementById('dp-date').textContent  = 'Selecciona un día';
+      document.getElementById('dp-title').textContent = '—';
+      document.getElementById('day-events-container').innerHTML = `<div class="no-events">
+        <svg viewBox="0 0 24 24" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        Haz clic en un día con eventos para ver los detalles.
+      </div>`;
+    }
+
+    // ── COURSES RENDER ────────────────────────────────────────────────
+    function renderCourses(filter) {
+      const grid = document.getElementById('courses-grid');
+      const list = filter === 'all' ? COURSES : COURSES.filter(c => c.filter === filter);
+      grid.innerHTML = list.map(c => `
+        <div class="course-card">
+          <div class="course-thumb">
+            <div class="play-btn"><svg viewBox="0 0 16 16"><path d="M4 2l10 6-10 6z"/></svg></div>
+            <span class="dur-tag">${c.duration}</span>
+          </div>
+          <div class="course-body">
+            <div class="course-cat">${c.cat}</div>
+            <h3>${c.title}</h3>
+            <p>${c.desc}</p>
+            <div class="course-meta">
+              <span class="course-tag ${c.status}">${c.status === 'inicio' ? 'Próximo inicio' : 'Abierto'}</span>
+              <span style="font-family: var(--mono); font-size: 10px; color: var(--muted-lt); letter-spacing: 0.08em;">${c.nextStart}</span>
+            </div>
+            <div class="course-footer">
+              <span class="course-price">${c.price}<small>${c.priceNote}</small></span>
+              <button class="btn btn-primary" style="font-size: 13px; padding: 9px 16px;">Inscribirse</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function filterCourses(filter, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderCourses(filter);
+    }
+
+    // ── TAB SWITCHING ─────────────────────────────────────────────────
+    function switchTab(id, btn) {
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('tab-' + id).classList.add('active');
+      btn.classList.add('active');
+    }
+
+    function toggleMenu() {
+      document.getElementById('hamburger').classList.toggle('open');
+      document.getElementById('mobile-menu').classList.toggle('open');
+    }
+
+    // ── INIT ──────────────────────────────────────────────────────────
+    renderCalendar();
+    renderCourses('all');
+
+    // Auto-select today if it has events
+    if (EVENTS[TODAY]) selectDay(TODAY, parseInt(TODAY.split('-')[2]));
+  </script>
+</body>
+</html>
