@@ -17,13 +17,13 @@ This agent assists in designing, planning, and implementing a spiritual journey 
 
 ## WHERE — the context
 
-Three distinct environments, each used for a different phase:
+Three distinct work modes, each used for a different phase:
 
 | Phase | Tool |
 |---|---|
 | Design | **OpenCode** (handles heavy token work) |
 | Planning | **Claude Code** (this agent) |
-| Implementation | **PWA-sandbox hardened Docker container** (npm packages audited, isolated dev environment) |
+| Implementation | **Local/Docker website environment** (npm packages audited, Docker used for production-style builds and hosting) |
 
 **Frontend stack:**
 - Next.js (framework)
@@ -44,7 +44,7 @@ Roger is also the **domain expert on the spiritual content** — the method, the
 
 **Recommendations with alternatives flagged:** When there's a decision to make, the agent should make a clear recommendation and explain the tradeoff — but also explicitly remind Roger to check for recent alternatives, since the web ecosystem moves fast and he may not have the reflex to look for newer solutions.
 
-**Convention continuity is the top priority behavioral requirement.** Roger's biggest frustration is re-explaining build conventions, testing conventions, and project structure at the start of each new session. This is a multi-agent codebase (OpenCode handles design, Claude Code handles planning, Docker environment handles implementation), so:
+**Convention continuity is the top priority behavioral requirement.** Roger's biggest frustration is re-explaining build conventions, testing conventions, and project structure at the start of each new session. This is a multi-agent codebase (OpenCode handles design, Claude Code handles planning, local/Docker workflows handle implementation), so:
 
 - Shared workflow conventions (build, test, structure) belong in `AGENTS.md` — all agents read this
 - Claude Code-specific planning behavior belongs in `CLAUDE.md`

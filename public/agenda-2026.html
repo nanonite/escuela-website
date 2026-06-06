@@ -47,34 +47,23 @@
     a { color: inherit; text-decoration: none; }
     .wrap { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
 
-    /* ── BANNER SLOT ── */
+    /* ── BRAND BANNER: top-only variant ── */
     .banner-slot {
       width: 100%;
-      min-height: 160px;
-      background: var(--cream-2);
-      border-bottom: 2px dashed var(--hairline-2);
+      height: 112px;
+      background: #030302;
+      border-bottom: 1px solid rgba(250,247,240,0.12);
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
     }
-    .banner-placeholder {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      color: var(--muted-lt);
-      text-align: center;
-    }
-    .banner-placeholder svg {
-      width: 32px; height: 32px;
-      stroke: var(--muted-lt); fill: none;
-      opacity: 0.5;
-    }
-    .banner-placeholder span {
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
+    .banner-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      opacity: 0.96;
     }
 
     /* ── STICKY NAV ── */
@@ -268,7 +257,107 @@
     .tab-panel { display: none; }
     .tab-panel.active { display: block; }
 
-    /* ── CALENDAR PANEL ── */
+    /* ── MONTH AGENDA PANEL ── */
+    .agenda-list-section {
+      padding: 40px 0 88px;
+    }
+    .agenda-intro {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 28px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--hairline);
+      margin-bottom: 12px;
+    }
+    .agenda-intro h2 {
+      font-family: var(--serif);
+      font-size: clamp(30px, 4vw, 46px);
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      line-height: 1.05;
+      margin: 0 0 10px;
+    }
+    .agenda-intro p {
+      color: var(--muted);
+      max-width: 58ch;
+      margin: 0;
+    }
+    .agenda-year {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--sage);
+      white-space: nowrap;
+    }
+    .year-agenda {
+      display: flex;
+      flex-direction: column;
+    }
+    .month-block {
+      display: grid;
+      grid-template-columns: minmax(150px, 0.28fr) 1fr;
+      gap: 28px;
+      padding: 34px 0;
+      border-bottom: 1px solid var(--hairline);
+    }
+    .month-name {
+      font-family: var(--serif);
+      font-size: clamp(28px, 3.2vw, 44px);
+      font-weight: 600;
+      letter-spacing: -0.012em;
+      line-height: 1;
+      margin: 0;
+      color: var(--ink);
+    }
+    .month-events {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .agenda-card {
+      min-height: 164px;
+      background: var(--elevated);
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-sm);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 2px 10px rgba(26,20,16,0.04);
+    }
+    .agenda-card h3 {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      line-height: 1.12;
+      margin: 0 0 12px;
+    }
+    .agenda-meta {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+      margin: 0 0 18px;
+    }
+    .agenda-place {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted-lt);
+    }
+    .agenda-link {
+      align-self: flex-start;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--sage);
+      padding-bottom: 2px;
+      border-bottom: 1px solid rgba(42,95,74,0.35);
+    }
+
+    /* legacy date-grid styles retained for old markup experiments */
     .cal-layout {
       display: grid;
       grid-template-columns: 1fr 340px;
@@ -598,6 +687,9 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
+      .agenda-intro { display: block; }
+      .agenda-year { margin-top: 18px; }
+      .month-block { grid-template-columns: 1fr; gap: 18px; }
       .cal-layout { grid-template-columns: 1fr; }
       .day-panel { position: static; }
       .courses-grid { grid-template-columns: 1fr; }
@@ -606,24 +698,18 @@
     }
     @media (max-width: 600px) {
       .wrap { padding: 0 20px; }
+      .banner-slot { height: 88px; }
       .page-hero h1 { font-size: 38px; }
+      .month-events { grid-template-columns: 1fr; }
       .tab-btn { padding: 14px 16px; font-size: 13px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ══ BANNER SLOT ═══════════════════════════════════════════════
-       Replace this entire element when the custom banner arrives.
-  ════════════════════════════════════════════════════════════════ -->
+  <!-- ══ TOP-ONLY BRAND BANNER ════════════════════════════════════ -->
   <div class="banner-slot" id="banner-slot">
-    <div class="banner-placeholder">
-      <svg viewBox="0 0 24 24" stroke-width="1.5">
-        <rect x="2" y="6" width="20" height="12" rx="2"/>
-        <path d="M2 10h20"/>
-      </svg>
-      <span>Banner — diseño personalizado por incorporar</span>
-    </div>
+    <img class="banner-image" src="brand-mandala-banner.jpeg" alt="Mandala luminoso de Escuela Brahmavidya" />
   </div>
 
   <!-- ══ STICKY HEADER ═════════════════════════════════════════════ -->
@@ -669,10 +755,10 @@
     <div class="tabs-bar">
       <div class="wrap">
         <div class="tabs-inner">
-          <button class="tab-btn active" onclick="switchTab('calendar', this)">
-            Calendario de Eventos
-            <span class="tab-count" id="total-count">—</span>
-          </button>
+            <button class="tab-btn active" onclick="switchTab('calendar', this)">
+              Agenda por mes
+              <span class="tab-count" id="total-count">16</span>
+            </button>
           <button class="tab-btn" onclick="switchTab('courses', this)">
             Cursos Disponibles
             <span class="tab-count">5</span>
@@ -681,50 +767,205 @@
       </div>
     </div>
 
-    <!-- ══ CALENDAR TAB ═══════════════════════════════════════════════ -->
-    <div id="tab-calendar" class="tab-panel active">
-      <div class="wrap">
-        <div class="cal-layout">
-          <!-- Left: calendar grid -->
-          <div>
-            <div class="month-nav">
-              <h2 id="month-title">Junio 2026</h2>
-              <div class="month-nav-btns">
-                <button class="nav-btn" data-dir="-1" onclick="changeMonth(-1)" title="Mes anterior">&#8592;</button>
-                <button class="nav-btn" data-dir="1"  onclick="changeMonth(1)"  title="Mes siguiente">&#8594;</button>
+      <!-- ══ CALENDAR TAB ═══════════════════════════════════════════════ -->
+      <div id="tab-calendar" class="tab-panel active">
+        <div class="wrap">
+          <section class="agenda-list-section" id="retiros" aria-label="Agenda 2026 por mes">
+            <div class="agenda-intro">
+              <div>
+                <h2>Programación por mes</h2>
+                <p>Una vista simple para revisar cursos, retiros y encuentros del año sin navegar día por día.</p>
               </div>
+              <div class="agenda-year">Agenda 2026</div>
             </div>
-            <div class="cal-grid" id="cal-grid">
-              <!-- rendered by JS -->
-            </div>
-            <div class="cal-legend">
-              <div class="legend-item"><span class="legend-dot sage"></span>Meditación / Satsang</div>
-              <div class="legend-item"><span class="legend-dot gold"></span>Inicio de curso</div>
-              <div class="legend-item"><span class="legend-dot terra"></span>Retiro / Especial</div>
-            </div>
-          </div>
 
-          <!-- Right: selected-day panel -->
-          <div class="day-panel" id="day-panel">
-            <div class="day-panel-head">
-              <div class="dp-date" id="dp-date">Selecciona un día</div>
-              <h3 id="dp-title">—</h3>
+            <div class="year-agenda">
+              <section class="month-block">
+                <h2 class="month-name">Febrero</h2>
+                <div class="month-events">
+                  <article class="agenda-card">
+                    <div>
+                      <h3>Curso Yoga para Principiantes</h3>
+                      <p class="agenda-meta">Inicio de ciclo formativo<span class="agenda-place">Virtual</span></p>
+                    </div>
+                    <a class="agenda-link" href="#cursos">Ver más</a>
+                  </article>
+                </div>
+              </section>
+
+              <section class="month-block">
+                <h2 class="month-name">Marzo</h2>
+                <div class="month-events">
+                  <article class="agenda-card">
+                    <div>
+                      <h3>Curso Meditación y Mantras</h3>
+                      <p class="agenda-meta">Práctica guiada y estudio<span class="agenda-place">Virtual</span></p>
+                    </div>
+                    <a class="agenda-link" href="#cursos">Ver más</a>
+                  </article>
+                  <article class="agenda-card">
+                    <div>
+                      <h3>Mauna, Retiro de Silencio</h3>
+                      <p class="agenda-meta">Marzo 19 - 23 2026<span class="agenda-place">La Pintada, Colombia</span></p>
+                    </div>
+                    <a class="agenda-link" href="#retiros">Ver más</a>
+                  </article>
+                </div>
+              </section>
+
+              <section class="month-block">
+                <h2 class="month-name">Abril</h2>
+                <div class="month-events">
+                  <article class="agenda-card">
+                    <div>
+                      <h3>Curso Chakras - Psicología de Oriente</h3>
+                      <p class="agenda-meta">Profundización filosófica y práctica<span class="agenda-place">Virtual</span></p>
+                    </div>
+                    <a class="agenda-link" href="#cursos">Ver más</a>
+                  </article>
+                </div>
+              </section>
+
+              <section class="month-block">
+                <h2 class="month-name">Mayo</h2>
+                <div class="month-events">
+                  <article class="agenda-card">
+                    <div>
+                      <h3>Retiro en Oliva</h3>
+                      <p class="agenda-meta">Mayo 1 - 4 2026<span class="agenda-place">Valencia, España</span></p>
+                    </div>
+                    <a class="agenda-link" href="#retiros">Ver más</a>
+                  </article>
+                </div>
+              </section>
+
+              <section class="month-block">
+                <h2 class="month-name">Junio</h2>
+                <div class="month-events">
+                  <article class="agenda-card">
+                    <div>
+                      <h3>Curso Ayurveda para la Vida</h3>
+                      <p class="agenda-meta">Fundamentos de la ciencia de la vida<span class="agenda-place">Virtual</span></p>
+                    </div>
+                    <a class="agenda-link" href="#cursos">Ver más</a>
+                  </article>
+                  <article class="agenda-card">
+                    <div>
+                      <h3>Solsticio de Verano</h3>
+                      <p class="agenda-meta">Clase masiva de yoga y meditación<span class="agenda-place">MAMM</span></p>
+                    </div>
+                    <a class="agenda-link" href="#retiros">Ver más</a>
+                  </article>
+                </div>
+              </section>
+
+              <section class="month-block">
+                <h2 class="month-name">Julio</h2>
+                <div class="month-events">
+                  <article class="agenda-card">
+                    <div>
+                      <h3>Curso Yoga para Principiantes</h3>
+                      <p class="agenda-meta">Nueva generación<span class="agenda-place">Virtual</span></p>
+                    </div>
+                    <a class="agenda-link" href="#cursos">Ver más</a>
+                  </article>
+                  <article class="agenda-card">
+                    <div>
+                      <h3>Retiro en Santa Marta</h3>
+                      <p class="agenda-meta">Julio 17 - 20 2026<span class="agenda-place">Santa Marta, Colombia</span></p>
+                    </div>
+                    <a class="agenda-link" href="#retiros">Ver más</a>
+                  </article>
+                </div>
+              </section>
+
+              <section class="month-block">
+                <h2 class="month-name">Agosto</h2>
+                <div class="month-events">
+                  <article class="agenda-card">
+                    <div>
+                      <h3>Maestría en Yoga Avanzada 300 horas</h3>
+                      <p class="agenda-meta">Inicio de inscripciones<span class="agenda-place">Virtual</span></p>
+                    </div>
+                    <a class="agenda-link" href="#cursos">Ver más</a>
+                  </article>
+                  <article class="agenda-card">
+                    <div>
+                      <h3>Retiro en México</h3>
+                      <p class="agenda-meta">Agosto 13 - 16 2026<span class="agenda-place">Tepoztlán, México</span></p>
+                    </div>
+                    <a class="agenda-link" href="#retiros">Ver más</a>
+                  </article>
+                </div>
+              </section>
+
+              <section class="month-block">
+                <h2 class="month-name">Septiembre</h2>
+                <div class="month-events">
+                  <article class="agenda-card">
+                    <div>
+                      <h3>Inscripciones Maestrías 2027</h3>
+                      <p class="agenda-meta">Apertura de cupos<span class="agenda-place">Virtual</span></p>
+                    </div>
+                    <a class="agenda-link" href="#cursos">Ver más</a>
+                  </article>
+                </div>
+              </section>
+
+              <section class="month-block">
+                <h2 class="month-name">Octubre</h2>
+                <div class="month-events">
+                  <article class="agenda-card">
+                    <div>
+                      <h3>Curso Yoga Nivel Intermedio</h3>
+                      <p class="agenda-meta">Profundización de práctica<span class="agenda-place">Virtual</span></p>
+                    </div>
+                    <a class="agenda-link" href="#cursos">Ver más</a>
+                  </article>
+                  <article class="agenda-card">
+                    <div>
+                      <h3>Peregrinaje India - Himalayas</h3>
+                      <p class="agenda-meta">Octubre 17 - 31 2026<span class="agenda-place">India - Himalayas</span></p>
+                    </div>
+                    <a class="agenda-link" href="#retiros">Ver más</a>
+                  </article>
+                </div>
+              </section>
+
+              <section class="month-block">
+                <h2 class="month-name">Noviembre</h2>
+                <div class="month-events">
+                  <article class="agenda-card">
+                    <div>
+                      <h3>Retiro en Santa Marta</h3>
+                      <p class="agenda-meta">Noviembre 27 - 30 2026<span class="agenda-place">Santa Marta, Colombia</span></p>
+                    </div>
+                    <a class="agenda-link" href="#retiros">Ver más</a>
+                  </article>
+                </div>
+              </section>
+
+              <section class="month-block">
+                <h2 class="month-name">Diciembre</h2>
+                <div class="month-events">
+                  <article class="agenda-card">
+                    <div>
+                      <h3>Intensivo en Bhakti Yoga</h3>
+                      <p class="agenda-meta">Cierre del año de práctica<span class="agenda-place">Virtual</span></p>
+                    </div>
+                    <a class="agenda-link" href="#cursos">Ver más</a>
+                  </article>
+                </div>
+              </section>
             </div>
-            <div id="day-events-container">
-              <div class="no-events">
-                <svg viewBox="0 0 24 24" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-                Haz clic en un día con eventos para ver los detalles.
-              </div>
-            </div>
+          </section>
           </div>
         </div>
-      </div>
-    </div>
 
     <!-- ══ COURSES TAB ════════════════════════════════════════════════ -->
     <div id="tab-courses" class="tab-panel">
       <div class="wrap">
-        <div class="courses-panel">
+          <div class="courses-panel" id="cursos">
           <div class="courses-filter">
             <button class="filter-btn active" onclick="filterCourses('all', this)">Todos</button>
             <button class="filter-btn" onclick="filterCourses('maestria', this)">Maestría espiritual</button>
@@ -1062,11 +1303,7 @@
     }
 
     // ── INIT ──────────────────────────────────────────────────────────
-    renderCalendar();
     renderCourses('all');
-
-    // Auto-select today if it has events
-    if (EVENTS[TODAY]) selectDay(TODAY, parseInt(TODAY.split('-')[2]));
   </script>
 </body>
 </html>
