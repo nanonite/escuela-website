@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Critique v2 - Escuela Brahmavidya Corrections</title>
+  <style>
+    :root {
+      --bg: #FAF7F0;
+      --panel: #F0E9DC;
+      --ink: #1A1410;
+      --muted: #6B5D52;
+      --line: rgba(26,20,16,0.16);
+      --sage: #2A5F4A;
+      --gold: #B8920A;
+      --terra: #9B4520;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    main { max-width: 1120px; margin: 0 auto; padding: 48px 28px 72px; }
+    header {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 28px;
+      align-items: end;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 30px;
+      margin-bottom: 32px;
+    }
+    .kicker {
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 11px;
+      color: var(--sage);
+      font-weight: 700;
+    }
+    h1 {
+      margin: 10px 0 12px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(40px, 6vw, 72px);
+      line-height: 0.98;
+      letter-spacing: -0.02em;
+    }
+    h2 {
+      margin: 0 0 10px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 28px;
+      line-height: 1.1;
+    }
+    .verdict {
+      margin: 0;
+      max-width: 70ch;
+      color: var(--muted);
+      font-size: 18px;
+    }
+    .meta, article, .actions, .chart, .score-tile {
+      background: rgba(240,233,220,0.62);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+    }
+    .meta { padding: 18px; font-size: 14px; color: var(--muted); }
+    .meta strong { color: var(--ink); }
+    .overview {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 28px;
+      margin-bottom: 32px;
+      align-items: center;
+    }
+    .chart { padding: 20px; }
+    .score-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+    }
+    .score-tile { padding: 16px; min-height: 118px; }
+    .score-tile b {
+      display: block;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 34px;
+      line-height: 1;
+      color: var(--sage);
+    }
+    .score-tile span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin: 28px 0;
+    }
+    article, .actions { padding: 22px; }
+    .band {
+      display: inline-flex;
+      gap: 8px;
+      align-items: baseline;
+      margin-bottom: 12px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .band strong { color: var(--sage); font-size: 22px; }
+    p { margin: 0 0 14px; }
+    ul { margin: 0; padding-left: 20px; }
+    li { margin: 8px 0; }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.92em;
+      background: var(--panel);
+      padding: 1px 5px;
+      border-radius: 5px;
+    }
+    .triad {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .check li { list-style: none; margin-left: -20px; }
+    .check li::before {
+      content: "";
+      display: inline-block;
+      width: 13px;
+      height: 13px;
+      border: 1px solid var(--muted);
+      border-radius: 3px;
+      margin-right: 8px;
+      transform: translateY(2px);
+    }
+    @media (max-width: 860px) {
+      header, .overview, .cards, .triad { grid-template-columns: 1fr; }
+      .score-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div>
+        <div class="kicker">OD critique skill - correction pass</div>
+        <h1>Escuela Brahmavidya web outputs, v2</h1>
+        <p class="verdict">Corrected in several practical areas: mobile navigation exists, the landing mini-calendar date alignment is fixed, filter pills were squared off, several CTAs are now links, and agenda month navigation stays inside 2026. Still not fully corrected: some primary actions remain inert, strict token discipline still drifts, and detail cleanup is incomplete.</p>
+      </div>
+      <div class="meta">
+        <p><strong>Artifacts reviewed:</strong> <code>public/index.html</code> and <code>public/agenda-2026.html</code></p>
+        <p><strong>Date:</strong> 2026-06-04</p>
+        <p><strong>Reviewer:</strong> OD - Critique skill</p>
+      </div>
+    </header>
+
+    <section class="overview" aria-label="Score overview">
+      <div class="chart">
+        <svg viewBox="0 0 360 360" role="img" aria-label="Radar chart of second critique scores">
+          <g transform="translate(180 180)">
+            <polygon points="0,-140 133,-43 82,113 -82,113 -133,-43" fill="none" stroke="rgba(26,20,16,0.16)"/>
+            <polygon points="0,-105 100,-32 62,85 -62,85 -100,-32" fill="none" stroke="rgba(26,20,16,0.12)"/>
+            <polygon points="0,-70 67,-22 41,57 -41,57 -67,-22" fill="none" stroke="rgba(26,20,16,0.10)"/>
+            <polygon points="0,-35 33,-11 21,28 -21,28 -33,-11" fill="none" stroke="rgba(26,20,16,0.08)"/>
+            <line x1="0" y1="0" x2="0" y2="-140" stroke="rgba(26,20,16,0.12)"/>
+            <line x1="0" y1="0" x2="133" y2="-43" stroke="rgba(26,20,16,0.12)"/>
+            <line x1="0" y1="0" x2="82" y2="113" stroke="rgba(26,20,16,0.12)"/>
+            <line x1="0" y1="0" x2="-82" y2="113" stroke="rgba(26,20,16,0.12)"/>
+            <line x1="0" y1="0" x2="-133" y2="-43" stroke="rgba(26,20,16,0.12)"/>
+            <polygon points="0,-112 100,-32 59,82 -59,82 -80,-26" fill="rgba(42,95,74,0.24)" stroke="#2A5F4A" stroke-width="3"/>
+            <circle cx="0" cy="-112" r="4" fill="#2A5F4A"/>
+            <circle cx="100" cy="-32" r="4" fill="#2A5F4A"/>
+            <circle cx="59" cy="82" r="4" fill="#2A5F4A"/>
+            <circle cx="-59" cy="82" r="4" fill="#2A5F4A"/>
+            <circle cx="-80" cy="-26" r="4" fill="#2A5F4A"/>
+          </g>
+          <text x="180" y="18" text-anchor="middle" font-size="12" fill="#6B5D52">Philosophy</text>
+          <text x="340" y="126" text-anchor="end" font-size="12" fill="#6B5D52">Hierarchy</text>
+          <text x="288" y="330" text-anchor="middle" font-size="12" fill="#6B5D52">Detail</text>
+          <text x="72" y="330" text-anchor="middle" font-size="12" fill="#6B5D52">Function</text>
+          <text x="20" y="126" text-anchor="start" font-size="12" fill="#6B5D52">Innovation</text>
+        </svg>
+      </div>
+      <div class="score-grid">
+        <div class="score-tile"><b>8.0</b><span>Philosophy consistency<br>Strong</span></div>
+        <div class="score-tile"><b>7.5</b><span>Visual hierarchy<br>Strong</span></div>
+        <div class="score-tile"><b>7.2</b><span>Detail execution<br>Strong</span></div>
+        <div class="score-tile"><b>7.2</b><span>Functionality<br>Strong</span></div>
+        <div class="score-tile"><b>6.0</b><span>Innovation<br>Functional</span></div>
+      </div>
+    </section>
+
+    <section class="cards">
+      <article>
+        <h2>Philosophy Consistency</h2>
+        <div class="band"><strong>8.0 / 10</strong> Strong</div>
+        <p>The correction pass tightened the system: both pages now define <code>--ease-out</code>, filter buttons use <code>var(--r-sm)</code> instead of a pill at <code>agenda-2026.html:479-489</code>, and the header/mobile-menu vocabulary is consistent across files at <code>index.html:155-197</code> and <code>agenda-2026.html:148-189</code>. The remaining drift is strict but real: <code>--elevated: #FFFFFF</code> is introduced at <code>index.html:27</code> and <code>agenda-2026.html:27</code> despite <code>DESIGN.md</code> saying not to invent values or use pure white.</p>
+        <ul>
+          <li><strong>Keep:</strong> The square filter correction and shared mobile menu pattern.</li>
+          <li><strong>Fix:</strong> Replace <code>--elevated: #FFFFFF</code> with an approved token or update <code>DESIGN.md</code> explicitly.</li>
+          <li><strong>Quick win:</strong> Add <code>--ink-2</code> from the design system before adding any new color token.</li>
+        </ul>
+      </article>
+
+      <article>
+        <h2>Visual Hierarchy</h2>
+        <div class="band"><strong>7.5 / 10</strong> Strong</div>
+        <p>The visual order is stronger because mobile no longer hides all navigation: the hamburger appears at <code>index.html:611-613</code> and <code>agenda-2026.html:601-602</code>, with a full-width mobile menu below the sticky header. The landing hero, Camino split, and agenda dark band still read clearly. The main hierarchy issue remains the mandated 160px banner placeholder at <code>index.html:627-635</code> and <code>agenda-2026.html:616-624</code>, which visually outranks the real page task until the final banner arrives.</p>
+        <ul>
+          <li><strong>Keep:</strong> The desktop-to-mobile nav adaptation now preserves orientation.</li>
+          <li><strong>Fix:</strong> Treat the banner as unfinished production chrome and replace it before final visual judgment.</li>
+          <li><strong>Quick win:</strong> Add a compact agenda summary row under <code>.page-hero</code> so the calendar value is visible sooner.</li>
+        </ul>
+      </article>
+
+      <article>
+        <h2>Detail Execution</h2>
+        <div class="band"><strong>7.2 / 10</strong> Strong</div>
+        <p>Several earlier detail defects were fixed: the landing mini-calendar now starts June 2026 on Monday at <code>index.html:802-808</code>, course card transitions use the shared easing at <code>index.html:459-488</code>, and nav button disabled states were added at <code>agenda-2026.html:293-305</code>. Detail is not fully clean: inline styles remain in stat cards at <code>index.html:692-703</code>, the agenda course renderer uses inline metadata/button styles at <code>agenda-2026.html:1031-1035</code>, and shared CSS is still duplicated between pages.</p>
+        <ul>
+          <li><strong>Keep:</strong> The calendar correction and disabled month-button states.</li>
+          <li><strong>Fix:</strong> Move remaining inline styles into named classes.</li>
+          <li><strong>Quick win:</strong> Create <code>.course-start-date</code>, <code>.btn-sm</code>, and stat-card text utility classes.</li>
+        </ul>
+      </article>
+
+      <article>
+        <h2>Functionality</h2>
+        <div class="band"><strong>7.2 / 10</strong> Strong</div>
+        <p>The big functional critiques were partly corrected. Landing CTAs are now links at <code>index.html:651</code> and <code>index.html:676-677</code>, mobile menu toggles are implemented at <code>index.html:957-962</code> and <code>agenda-2026.html:1056-1059</code>, and agenda navigation is clamped to 2026 at <code>agenda-2026.html:904-909</code> plus <code>agenda-2026.html:955-965</code>. However, <code>Comenzar el camino</code> still points to <code>href=\"#\"</code> at <code>index.html:723</code>, <code>Crea tu cuenta</code> remains a plain button at <code>index.html:926</code>, and rendered <code>Inscribirse</code> buttons remain inert at <code>agenda-2026.html:1035</code>.</p>
+        <ul>
+          <li><strong>Keep:</strong> The month clamp and mobile menu were meaningful functional fixes.</li>
+          <li><strong>Fix:</strong> Resolve the last primary actions before calling the pages corrected.</li>
+          <li><strong>Quick win:</strong> Point all unfinished actions to a temporary <code>#contacto</code> or agenda course tab anchor.</li>
+        </ul>
+      </article>
+
+      <article>
+        <h2>Innovation</h2>
+        <div class="band"><strong>6.0 / 10</strong> Functional</div>
+        <p>The correction pass improves craft rather than concept. The most distinctive element is still the landing agenda band at <code>index.html:386-451</code>, and the rest remains a competent premium editorial site with stat cards, course cards, tabbed content, and a marquee. That is appropriate, but no new branded visual signature was added during the correction pass.</p>
+        <ul>
+          <li><strong>Keep:</strong> The restraint suits a contemplative school better than novelty for its own sake.</li>
+          <li><strong>Fix:</strong> Add one owned visual motif for the Camino, not another generic card pattern.</li>
+          <li><strong>Quick win:</strong> Replace gradient course thumbnails with practice-specific artwork or photography.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="triad">
+      <div class="actions">
+        <h2>Corrected</h2>
+        <ul class="check">
+          <li>Mobile navigation now exists on both pages.</li>
+          <li>Landing hero/course CTAs mostly became links.</li>
+          <li>Agenda month navigation is disabled at January and December 2026.</li>
+          <li>Landing mini-calendar now matches June 2026 starting on Monday.</li>
+          <li>Agenda filter buttons no longer use <code>999px</code> pill radius.</li>
+        </ul>
+      </div>
+      <div class="actions">
+        <h2>Still Fix</h2>
+        <ul class="check">
+          <li>Replace the remaining inert primary actions: <code>href="#"</code>, account creation, and course enrollment.</li>
+          <li>Remove or formally authorize <code>--elevated: #FFFFFF</code>.</li>
+          <li>Move inline styles into CSS classes.</li>
+          <li>Deduplicate shared CSS across the two pages.</li>
+          <li>Replace the placeholder banner before final production review.</li>
+        </ul>
+      </div>
+      <div class="actions">
+        <h2>Quick Wins</h2>
+        <ul class="check">
+          <li>Make <code>Crea tu cuenta</code> an anchor with a real route or contact target.</li>
+          <li>Render <code>Inscribirse</code> as an <code>a</code> element with course-specific query params.</li>
+          <li>Add <code>.stat-status</code>, <code>.stat-title</code>, <code>.stat-note</code>, and <code>.course-start-date</code>.</li>
+          <li>Change remaining bare <code>transition: color 150ms</code> to the motion token.</li>
+          <li>Use a shared stylesheet if these pages will keep evolving together.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

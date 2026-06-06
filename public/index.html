@@ -587,7 +587,14 @@
       transition: color 150ms;
     }
     .footer-links a:hover { color: var(--ink); }
-    .btn-sm { font-size: 13px; padding: 8px 14px; }
+    .btn-sm  { font-size: 13px; padding: 8px 14px; }
+    .btn-lg  { font-size: 15px; padding: 13px 28px; }
+
+    /* stat-card content utilities */
+    .stat-inline-row  { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .stat-status-text { font-size: 14px; color: var(--muted); }
+    .stat-step-title  { font-family: var(--serif); font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+    .stat-note        { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 10px; }
 
     /* ── SCROLL REVEAL ── */
     .reveal {
@@ -689,18 +696,16 @@
         </div>
         <div class="stat-card full">
           <div class="stat-label">Paso actual</div>
-          <div class="stat-inline" style="margin-bottom: 10px;">
+          <div class="stat-inline-row">
             <span class="pulse"></span>
-            <span style="font-size: 14px; color: var(--muted);">En progreso</span>
+            <span class="stat-status-text">En progreso</span>
           </div>
-          <div style="font-family: var(--serif); font-size: 18px; font-weight: 600; margin-bottom: 8px;">
-            Disolviendo el Nudo del Ego
-          </div>
-          <div style="font-size: 13px; color: var(--muted);">Paso 3 de 7 &mdash; 3 reflexiones enviadas</div>
+          <div class="stat-step-title">Disolviendo el Nudo del Ego</div>
+          <div class="stat-note">Paso 3 de 7 &mdash; 3 reflexiones enviadas</div>
         </div>
         <div class="stat-card full">
           <div class="stat-label">Última verificación</div>
-          <div style="font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 10px;">
+          <div class="stat-note">
             Paso 2 <strong>"Anclando el Cuerpo"</strong> verificado por <strong>maestra Elena R.</strong>
           </div>
           <span class="stat-tag">Aprobado con distinción</span>
@@ -720,7 +725,7 @@
             <p class="section-lede">
               Siete etapas de autoindagación. Cada etapa contiene preguntas de autorreflexión — respondidas con honestidad, enviadas y verificadas por nuestro equipo docente antes de avanzar. Esto no es un examen. Es un espejo.
             </p>
-            <a href="#" class="btn btn-primary">Comenzar el camino</a>
+            <a href="#registro" class="btn btn-primary">Comenzar el camino</a>
           </div>
           <div class="steps-list">
             <div class="step-row">
@@ -919,11 +924,11 @@
     <hr class="rule">
 
     <!-- ══ CLOSING CTA ════════════════════════════════════════════════ -->
-    <section class="closing reveal">
+    <section class="closing reveal" id="registro">
       <div class="wrap">
         <h2>Comienza donde estás. El camino ya está bajo tus pies.</h2>
         <p>Registro gratuito desbloquea las dos primeras etapas del Camino. Acceso completo a las siete etapas y la videoteca — $12/mes o $99/año.</p>
-        <button class="btn btn-primary" style="font-size: 15px; padding: 13px 28px;">Crea tu cuenta</button>
+        <a href="#registro" class="btn btn-primary btn-lg">Crea tu cuenta</a>
       </div>
     </section>
 

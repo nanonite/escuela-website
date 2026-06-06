@@ -20,6 +20,7 @@ This file is the single source of truth. Skills must not invent values outside i
 --cream:      #FAF7F0   /* primary background */
 --cream-2:    #F0E9DC   /* secondary background, hover states */
 --cream-3:    #E8DDD0   /* pressed / subtle depth */
+--elevated:   #FFFFFF   /* card surface, one step above --cream; use only on cards/panels sitting on --cream */
 --ink:        #1A1410   /* primary text */
 --ink-2:      #2D261E   /* secondary headings */
 --muted:      #6B5D52   /* body text, captions */

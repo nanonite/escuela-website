@@ -138,6 +138,8 @@
     .btn-primary { background: var(--sage); color: #fff; }
     .btn-primary:hover { background: var(--sage-lt); }
     .btn-primary:active { transform: scale(0.98); }
+    .btn-sm  { font-size: 13px; padding: 9px 16px; }
+    .btn-lg  { font-size: 15px; padding: 13px 28px; }
     .btn-ghost {
       background: transparent;
       color: var(--muted);
@@ -560,6 +562,7 @@
     }
     .course-tag.inicio  { background: var(--gold-pale); color: var(--gold); }
     .course-tag.abierto { background: var(--sage-pale); color: var(--sage); }
+    .course-start-date  { font-family: var(--mono); font-size: 10px; color: var(--muted-lt); letter-spacing: 0.08em; }
     .course-footer { display: flex; align-items: center; justify-content: space-between; }
     .course-price {
       font-family: var(--serif);
@@ -1028,11 +1031,11 @@
             <p>${c.desc}</p>
             <div class="course-meta">
               <span class="course-tag ${c.status}">${c.status === 'inicio' ? 'Próximo inicio' : 'Abierto'}</span>
-              <span style="font-family: var(--mono); font-size: 10px; color: var(--muted-lt); letter-spacing: 0.08em;">${c.nextStart}</span>
+              <span class="course-start-date">${c.nextStart}</span>
             </div>
             <div class="course-footer">
               <span class="course-price">${c.price}<small>${c.priceNote}</small></span>
-              <button class="btn btn-primary" style="font-size: 13px; padding: 9px 16px;">Inscribirse</button>
+              <a href="?inscripcion=${c.id}" class="btn btn-primary btn-sm">Inscribirse</a>
             </div>
           </div>
         </div>
